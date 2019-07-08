@@ -1,0 +1,93 @@
+{
+    "data_manager": {
+        "type": "dm",
+        "dm": {
+            "url": "http://zaip-data-manager:8030",
+            "manage_url": "10.86.104.2:8060",
+            "jnlp_url": "http://10.86.104.2"
+        }
+    },
+    "data_server": {
+        "http_port": 8020,
+        "data_port": "60000-65535",
+        "control_port": 21
+    },
+    "data_server_hosts": {
+        "192.168.100.1": "10.86.104.2"
+    },
+    "docker_api_server": {
+        "host": "192.168.100.1",
+        "port": 4232
+    },
+    "docker_registry": "10.86.104.2:5000",
+    "etcd_server": "192.168.100.1:2379",
+    "file_server": {
+        "type": "3",
+        "file_uploader_url": "",
+        "odpp": {
+            "url": "http://10.42.10.55:18070/odpp/plat",
+            "space": "ai_plat",
+            "data_base_dir": "/iqa65/data/",
+            "username": "ai_platform",
+            "password": "ai123",
+            "version": "v1.0"
+        }
+    },
+    "kafka_bootstrap_servers": "broker:9092",
+    "kubernetes_api_server_port": 8080,
+    "kubernetes_master_host": "10.86.104.2",
+    "ingress" : {
+        "ingress_host": "10.86.104.2"
+    },
+    "mongodb_server": {
+        "host": "mongo-service",
+        "port": 27017,
+        "username": "zteAI",
+        "password": "zteAI123!",
+        "encrypted_password": "ayUqePwsrH0StqpO+zqUgg=="
+    },
+    "mysql_server": {
+        "host": "10.86.104.2",
+        "port": 5518,
+        "username": "root",
+        "password": "db10$ZTE",
+        "backup_server": {
+            "host": "10.86.104.2",
+            "port": 22,
+            "username": "t630",
+            "password": "t630",
+            "mysqldump": "/home/zxin10/bin/mysqldump",
+            "path": "/var/data/share/mysql-backup"
+        }
+    },
+    "portal_host": "10.86.104.2",
+    "redis_server": {
+        "host": "redis-service",
+        "port": 6379,
+        "is_cluster": false,
+        "password": "zteAI123!",
+        "encrypted_password": "ayUqePwsrH0StqpO+zqUgg=="
+    },
+    "replicas": {
+        "app_controller": 2,
+	"app_controller_log": 2,
+	"assist": 2,
+        "proxy": 3,
+        "nginx": 2,
+        "data_agent": 3,
+        "data_manager": 2,
+        "download": 3,
+        "model_parser": 3,
+        "quota_manager": 2,
+        "service_manager": 2,
+        "service_manager_portal": 2,
+        "tenant_manager": 2
+    },
+    "resource_manager": {
+        "worker_cpu_ratio": 20
+    },
+    "workspace_path": "/var/data/share/am",
+    "workspace_server": "192.168.100.1",
+    "zaip_api_ip": "10.86.104.2",
+    "zaip_api_port": 8060
+}

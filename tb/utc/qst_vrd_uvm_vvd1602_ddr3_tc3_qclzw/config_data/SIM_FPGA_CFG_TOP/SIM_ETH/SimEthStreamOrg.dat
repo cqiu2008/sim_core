@@ -1,0 +1,236 @@
+//===============================================================================================//
+//****
+//Public Stream Configuration 
+//****
+//===============================================================================================//
+//Public Stream address
+@0000
+//==[1B][十进制]使能流数目（0-255个） = 3
+03 
+//==[4B][十进制]灌包数量（0-4G个） = 50000
+00 00 c3 50 
+//==[2B][十进制]灌包流量（0-10000M） = 200 
+00 C8
+//==[2B][十进制]持续猝发传输包数量（0-65536个） = 1
+00 01 
+//==[4B][十进制]猝发传输起始帧号（第0-4G个） = 12
+00 00 00 0c 
+//==[4B][十进制]猝发传输结束帧号（第0-4G个） = 24
+00 00 00 18 
+//===============================================================================================//
+//****
+//==NO.1 Stream [4] OAM-CCM
+//****
+//===============================================================================================//
+//==Private Stream address
+@400
+//==1 [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)
+00
+//==2 [2B][HEX] packet Frequency 
+00 01
+//==3 [1B][HEX] pload set type <br> b3 (Length) =1:fix,=0:random <br> b2-b0 (Pattern) b2:random,b1:fix,b0:inc 
+08
+//==4 [2B][HEX] pload set length 
+00 0a
+//==5 [1B][HEX] pload set fix value 
+f4
+//==6 [1B][HEX] pload set inc value 
+01
+//==7 [2B][HEX] random length low
+00 40
+//==8 [2B][HEX] random length high
+01 00
+//==9 [1B][HEX]Preamble_Type(b0=1,hc pkt)
+00
+//==10 [1B][HEX]sfd 
+d5
+//==11 [6B][HEX] Destination Mac
+00 00 01 00 00 01
+//==12 [6B][HEX]Source Mac
+00 10 94 00 00 02
+//==13 <b> [2B][HEX] vlan word size &gt;&gt; </b>
+00 01
+//==14 [4B][HEX] vlan word mem[0]
+81 00 00 64
+//==15 [4B][HEX] vlan word mem[1]
+81 00 00 01
+//==16 [4B][HEX] vlan word mem[2] 
+91 00 00 02
+//==17 [4B][HEX] vlan word mem[3] 
+92 00 00 03
+//==18 [4B][HEX] vlan word mem[4] 
+88 a8 00 04
+//==19 [4B][HEX] vlan word mem[5] 
+88 a8 00 05
+//==20 [4B][HEX] vlan word mem[6] 
+88 a8 00 06
+//==21 [4B][HEX] vlan word mem[7] 
+88 a8 00 07
+//==22 [2B][HEX] eth type 
+fe 02
+//==23 <b> [2B][HEX]sub head size </b>
+00 4B
+//==24 [1B][HEX]CCM-MEL/Version
+00
+//==25 [1B][HEX]CCM-opcode(0x01)
+01
+//==26 [1B][HEX]CCM-Flag/rdi/ 
+00
+//==27 [1B][HEX]CCM-TLV Offset(0x70)
+70
+//==28 [4B][HEX]CCM-Sequence Number 
+04 03 02 01
+//==29 [2B][HEX]CCM-MEP ID 
+12 11
+//==30 [48B][HEX]CCM-MEG ID 
+48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01
+//==31 [4B][HEX]CCM-TxFCf
+04 03 02 01
+//==32 [4B][HEX]CCM-RxFCb 
+14 13 12 11
+//==33 [4B][HEX]CCM-TxFCb 
+24 23 22 21
+//==34 [4B][HEX]CCM-Reserved 
+34 33 32 31
+//==35 [1B][HEX]CCM-End TLV 0 
+00
+//===============================================================================================//
+//****
+//==NO.2 Stream [9]  ipv4
+//****
+//===============================================================================================//
+//==Private Stream address
+@800
+//==1 [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)
+10
+//==2 [2B][HEX] packet Frequency 
+00 01
+//==3 [1B][HEX] pload set type <br> b3 (Length) =1:fix,=0:random <br> b2-b0 (Pattern) b2:random,b1:fix,b0:inc 
+08
+//==4 [2B][HEX] pload set length 
+00 2a
+//==5 [1B][HEX] pload set fix value 
+f4
+//==6 [1B][HEX] pload set inc value 
+01
+//==7 [2B][HEX] random length low
+00 40
+//==8 [2B][HEX] random length high
+01 00
+//==9 [1B][HEX]Preamble_Type(b0=1,hc pkt)
+00
+//==10 [1B][HEX]sfd 
+d5
+//==11 [6B][HEX] Destination Mac
+00 00 01 00 00 01
+//==12 [6B][HEX]Source Mac
+00 10 94 00 00 02
+//==13 <b> [2B][HEX] vlan word size &gt;&gt; </b>
+00 00
+//==14 [4B][HEX] vlan word mem[0]
+81 00 00 00
+//==15 [4B][HEX] vlan word mem[1]
+81 00 00 01
+//==16 [4B][HEX] vlan word mem[2] 
+91 00 00 02
+//==17 [4B][HEX] vlan word mem[3] 
+92 00 00 03
+//==18 [4B][HEX] vlan word mem[4] 
+88 a8 00 04
+//==19 [4B][HEX] vlan word mem[5] 
+88 a8 00 05
+//==20 [4B][HEX] vlan word mem[6] 
+88 a8 00 06
+//==21 [4B][HEX] vlan word mem[7] 
+88 a8 00 07
+//==22 [2B][HEX] eth type 
+08 00
+//==23 [2B][HEX]sub head size 
+00 3E
+//==24 <b> [1B][HEX] IPV4 <br> version 4b(0x4),IHL 4b &gt;&gt; </b>
+40
+//==25 [1B][HEX] IPV4:Type 
+00
+//==26 [2B][HEX] IPV4:total length 
+00 00
+//==27 [2B][HEX] IPV4:identification 
+00 00
+//==28 [2B][HEX] IPV4:flag 4b ,<br> fragment offset 12 b 
+00 00
+//==29 [1B][HEX] IPV4:Time to Live 
+00
+//==30 [1B][HEX] IPV4:Protocol 
+11
+//==31 [2B][HEX] IPV4:Header Checksum 
+00 00
+//==32 [4B][HEX] IPV4:Source Address 
+14 13 12 11
+//==33 [4B][HEX] IPV4:Dest Address 
+24 23 22 21
+//==34 [4B][HEX] IPV4:Option+Padding 
+e4 e3 e2 e1
+//===============================================================================================//
+//****
+//==NO.3 Stream [10] ipv6
+//****
+//===============================================================================================//
+//==Private Stream address
+@c00
+//==1 [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)
+20
+//==2 [2B][HEX] packet Frequency 
+00 01
+//==3 [1B][HEX] pload set type <br> b3 (Length) =1:fix,=0:random <br> b2-b0 (Pattern) b2:random,b1:fix,b0:inc 
+08
+//==4 [2B][HEX] pload set length 
+00 2a
+//==5 [1B][HEX] pload set fix value 
+f4
+//==6 [1B][HEX] pload set inc value 
+01
+//==7 [2B][HEX] random length low
+00 40
+//==8 [2B][HEX] random length high
+01 00
+//==9 [1B][HEX]Preamble_Type(b0=1,hc pkt)
+00
+//==10 [1B][HEX]sfd 
+d5
+//==11 [6B][HEX] Destination Mac
+00 00 01 00 00 01
+//==12 [6B][HEX]Source Mac
+00 10 94 00 00 02
+//==13 <b> [2B][HEX] vlan word size &gt;&gt; </b>
+00 00
+//==14 [4B][HEX] vlan word mem[0]
+81 00 00 00
+//==15 [4B][HEX] vlan word mem[1]
+81 00 00 01
+//==16 [4B][HEX] vlan word mem[2] 
+91 00 00 02
+//==17 [4B][HEX] vlan word mem[3] 
+92 00 00 03
+//==18 [4B][HEX] vlan word mem[4] 
+88 a8 00 04
+//==19 [4B][HEX] vlan word mem[5] 
+88 a8 00 05
+//==20 [4B][HEX] vlan word mem[6] 
+88 a8 00 06
+//==21 [4B][HEX] vlan word mem[7] 
+88 a8 00 07
+//==22 [2B][HEX] eth type 
+08 00
+//==23 [2B][HEX]sub head size 
+00 28
+//==24 <b> [4B][HEX] IPV6 version 4b(0x6),<br>Traffic Class 8b, FL 20b&gt;&gt; </b>
+60 00 00 00
+//==25 [2B][HEX] IPV6:Payload Length 
+01 00
+//==26 [1B][HEX] IPV6:Next Header 
+00
+//==27 [1B][HEX] IPV6:Hop Limit 
+00
+//==28 [16B][HEX] IPV6:Source Address 
+0f 0e 0d 0c 0b 0a 09 08 07 06 05 04 03 02 01 00
+//==29 [16B][HEX] IPV6:Dest Address 
+1f 1e 1d 1c 1b 1a 19 18 17 16 15 14 13 12 11 10

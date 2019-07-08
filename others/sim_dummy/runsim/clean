@@ -1,0 +1,42 @@
+#!/bin/bash
+# Program:
+#			Save the zshrc , bashrc gvim and so on
+# History:
+# 2018/12/01	Qiu Chao First release
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+SIM_CORE_PATH=/home/cqiu/AIPrj/sim/sim_core
+
+funDeleteFolder(){
+	if [[ ! -d $1 ]]; then
+		echo "the path $1 does not exist"
+		echo "we no need to delete $1 "
+	else
+		rm -rf $1
+		echo "the path $1 has been deleted"
+	fi
+}
+
+funDeleteFile(){
+	if [[ ! -e $1 ]]; then
+		echo "the path $1 does not exist"
+		echo "we no need to delete $1 "
+	else
+		rm -rf $1
+		echo "the path $1 has been deleted"
+	fi
+}
+
+if [[ ! -d $SIM_CORE_PATH ]]; then 
+	echo "Error the $SIM_CORE_PATH does not exist "
+else
+	funDeleteFile 	./tc.cfg 
+	funDeleteFile 	./makefile
+	funDeleteFolder ../doc
+	funDeleteFolder ../tb
+	funDeleteFolder ../version_rtl
+	funDeleteFolder ../vf
+fi
+
+echo "Finished link $SIM_CORE_PATH" 
+

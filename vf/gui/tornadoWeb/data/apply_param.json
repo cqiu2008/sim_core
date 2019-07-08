@@ -1,0 +1,1 @@
+{"keep_docker_images": false, "dry_run": true, "kubernetes_docker_registry": "10.0.2.15:5000", "package_path": "/"}

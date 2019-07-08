@@ -1,0 +1,75 @@
+#*****************************************************************************
+# This is the makeflie to control the whole verification environment
+#
+# Author: Qiu Chao 
+# Date  : 2018/11/20
+#
+#*****************************************************************************
+
+-include Makefile.flist
+
+.PHONY:preparation
+preparation: vloglist xsimprj 
+
+####Generate the Makfile.flist
+.PHONY:vloglist
+vloglist:
+	####Write the "VLOG_LIST := \" to the Makefile.flist
+	echo "VLOG_LIST := \\" 					> $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Get the flist to Makefile.flist,(such as xxx.v xxxx.sv,and so on)
+	find $(RTL_ROOT) 			-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Add \ in the end of line.(such as xxx.v conver to  xxx.v \ and so on)
+	####"\.v \\\" means ".v \"
+	sed -i "s/\.v/\.v \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.sv/\.sv \\\/g" $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Filter the (_bb.v,_inst.v ...)in the ipcore folder 
+	#### ".*" can math every char every length
+	sed -i '/ipcoresyn/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_bb/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_inst\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_xilinx\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; 
+
+####Generate the xsim.prj file
+.PHONY:xsimprj
+xsimprj:
+	##Get the .v and .sv file to xsim.prj
+	find $(RTL_ROOT) 			-name \*.v 	>$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##Delete the line with "/ipcoresyn/","ipcoresim..._bb",and so on.
+	sed -i '/ipcoresyn/d' 			    			$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	sed -i '/ipcoresim.*_bb/d' 		    			$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	sed -i '/ipcoresim.*_inst\./d' 	    			$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	sed -i '/ipcoresim.*_xilinx\./d'    			$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##When the line tail has .v , add "verilog xil_defaultlib ""on the line head.
+	sed -i '/\.v/ s/^/verilog xil_defaultlib \"/g'  $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##When the line tail has .sv , add "sv xil_defaultlib ""on the line head.
+	sed -i '/\.sv/ s/^/sv xil_defaultlib \"/g'   	$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##Add " in the end of every line.
+	sed -i 's/\.v/\.v\"/g' 							$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	sed -i 's/\.sv/\.sv\"/g' 						$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##Add "verilog xil_defaultlib "$(VF_ROOT)/vf/glbl/glbl.v" to the xsim.prj
+	echo "verilog xil_defaultlib \"$(VF_ROOT)/glbl/glbl.v\""	>> $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##Add "nosort" to the xsim.prj
+	echo "nosort"	>> $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; 
+
+####Generate the config.tcl file 
+.PHONY:tclconfig
+tclconfig:
+	####Write the "add_wave -r *" to the config.tcl , means all signals will be captured
+	@echo "add_wave *" 					>  $(RUNSIM_ROOT)/run_$(PAR_TC)/config.tcl ; \
+	####Write the "run -all" to the config.tcl , means run all to the testbench 
+	echo "run -all " 						>> $(RUNSIM_ROOT)/run_$(PAR_TC)/config.tcl ; 
+
+####sim
+.PHONY:sim
+sim:
+	xvlog -sv -work worklib $(VLOG_LIST) ; \
+	xvlog -prj $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	xelab -debug all -prj $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj -s tb_dut_top.snapshot worklib.tb_dut_top ; \
+	xsim tb_dut_top.snapshot -tclbatch $(RUNSIM_ROOT)/run_$(PAR_TC)/config.tcl -wdb xsim.wdb -gui
+

@@ -1,0 +1,38 @@
+#*****************************************************************************
+# This is the makeflie to control the whole verification environment
+#
+# Author: Qiu Chao 
+# Date  : 2018/11/20
+#
+#*****************************************************************************
+
+topname=$(shell more $(RTL_ROOT)/top.name) 
+
+####Generate the syn.list
+.PHONY:synlist
+synlist:
+	find $(RTL_ROOT) -name \*.v > $(RUNSIM_ROOT)/$(IP_PRJ)/syn.flist ; \
+	find $(RTL_ROOT) -name \*.sv >> $(RUNSIM_ROOT)/$(IP_PRJ)/syn.flist ; \
+	sed -i '/ipcoresim/d' $(RUNSIM_ROOT)/$(IP_PRJ)/syn.flist ; \
+	sed -i 's/^/add_files -norecurse /g' $(RUNSIM_ROOT)/$(IP_PRJ)/syn.flist ; 
+
+####Generate the cons.list
+.PHONY:conslist
+conslist:
+	find $(RTL_ROOT) -name \*.xdc > $(RUNSIM_ROOT)/$(IP_PRJ)/cons.flist ; \
+	sed -i 's/^/add_files -fileset constrs_1 -norecurse /g' $(RUNSIM_ROOT)/$(IP_PRJ)/cons.flist ; 
+
+####Generate the create.tcl
+.PHONY:preparation
+preparation:synlist conslist
+	@echo "set home_dir $(RUNSIM_ROOT)/$(IP_PRJ)" > $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	echo "set pro_name $(topname)" >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	echo 'set device_type xczu9eg-ffvb1156-2l-e-es2' >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	echo 'create_project -force $${pro_name} $${home_dir}/dev -part $${device_type}' >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	echo 'set_property simulator_language Verilog [current_project]' >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	cat $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl $(RUNSIM_ROOT)/$(IP_PRJ)/syn.flist >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	echo 'update_compile_order -fileset sources_1' >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	echo 'update_compile_order -fileset sim_1' >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	cat $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl $(RUNSIM_ROOT)/$(IP_PRJ)/cons.flist >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	echo 'launch_runs impl_1 -to_step write_bitstream -jobs 2' >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; \
+	echo 'start_gui' >> $(RUNSIM_ROOT)/$(IP_PRJ)/create.tcl ; 

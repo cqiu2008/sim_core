@@ -1,0 +1,14 @@
+VVD_SIM_LIB := \
+-L std=$(RDI_DATADIR)/xsim/vhdl/std \
+-L ieee=$(RDI_DATADIR)/xsim/vhdl/ieee \
+-L ieee_proposed=$(RDI_DATADIR)/xsim/vhdl/ieee_proposed \
+-L vl=$(RDI_DATADIR)/xsim/vhdl/vl \
+-L synopsys=$(RDI_DATADIR)/xsim/vhdl/synopsys \
+-L unisim=$(RDI_DATADIR)/xsim/vhdl/unisim \
+-L unimacro=$(RDI_DATADIR)/xsim/vhdl/unimacro \
+-L unifast=$(RDI_DATADIR)/xsim/vhdl/unifast \
+-L simprims_ver=$(RDI_DATADIR)/xsim/verilog/simprims_ver \
+-L unisims_ver=$(RDI_DATADIR)/xsim/verilog/unisims_ver \
+-L unimacro_ver=$(RDI_DATADIR)/xsim/verilog/unimacro_ver \
+-L unifast_ver=$(RDI_DATADIR)/xsim/verilog/unifast_ver \
+-L secureip=$(RDI_DATADIR)/xsim/verilog/secureip 

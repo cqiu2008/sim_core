@@ -1,0 +1,136 @@
+Magic 271485
+Revision Verdi3_I-2014.03-SP2
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 30 850 444 312 175
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / -e interfacePort "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnna_vgg16sequence/runsim/run_qst_vrd_nuvm_vvd1602_hls_vgg16seq/tb_dut_top.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+windowTimeUnit 1ms
+
+; waveform viewport range
+zoom 0.000000 0.534690 1m
+cursor 0.122105
+marker 0.020875
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 26
+; marker line index
+markerPos 40
+
+; Run Time Signal and Member
+; userBusMem member ...
+; saveRunSig name
+activeDirFile "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnna_vgg16sequence/runsim/run_qst_vrd_nuvm_vvd1602_hls_vgg16seq/tb_dut_top.fsdb"
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[7]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[6]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[5]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[4]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[3]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[2]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[1]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[0]
+saveRunSig "d0[7:0]"
+
+; Run Time Signal and Member
+; userBusMem member ...
+; saveRunSig name
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[15]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[14]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[13]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[12]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[11]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[10]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[9]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[8]
+saveRunSig "d1[7:0]"
+
+; Run Time Signal and Member
+; userBusMem member ...
+; saveRunSig name
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[23]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[22]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[21]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[20]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[19]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[18]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[17]
+userBusMem /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/q0[16]
+saveRunSig "d2[7:0]"
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G1"
+activeDirFile "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnna_vgg16sequence/runsim/run_qst_vrd_nuvm_vvd1602_hls_vgg16seq/tb_dut_top.fsdb"
+addSignal -h 15 /apatb_convolution_top/AESL_inst_convolution/convolution_memorybus2_m_axi_U/ACLK
+addSignal -h 15 -UNSIGNED -HEX -holdScope AWADDR[31:0]
+addSignal -h 15 -holdScope AWVALID
+addSignal -h 15 -holdScope AWREADY
+addSignal -h 15 -holdScope WREADY
+addSignal -h 15 -holdScope WVALID
+addSignal -h 15 -UNSIGNED -HEX -holdScope WDATA[127:0]
+addGroup "loadImage"
+addSignal -h 15 -UNSIGNED -UDEC /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/grp_convolution_loadImageFromDRAM_fu_3531/ibuf0_V_address0[9:0]
+addSignal -h 15 -holdScope ibuf0_V_ce0
+addSignal -h 15 -holdScope ibuf0_V_we0
+addSignal -h 15 -UNSIGNED -HEX -holdScope ibuf0_V_d0[127:0]
+addGroup "multiSildingWindows"
+addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/ibuf0_V_U/address0[9:0]
+addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -holdScope ce0
+addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -holdScope we0
+addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope q0[127:0]
+addSignal -h 15 -UNSIGNED -UDEC /d0[7:0]
+addSignal -h 15 -UNSIGNED -UDEC /d1[7:0]
+addSignal -h 15 -UNSIGNED -UDEC /d2[7:0]
+addGroup "sbuf0"
+addSignal -h 15 -UNSIGNED -HEX /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/sbuf0_V_0_U/address0[8:0]
+addSignal -h 15 -holdScope ce0
+addSignal -h 15 -holdScope we0
+addSignal -h 15 -UNSIGNED -HEX -holdScope d0[127:0]
+addGroup "sbuf1"
+addSignal -h 15 -UNSIGNED -HEX /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/sbuf0_V_1_U/address0[8:0]
+addSignal -h 15 -holdScope ce0
+addSignal -h 15 -holdScope we0
+addSignal -h 15 -UNSIGNED -HEX -holdScope d0[127:0]
+addGroup "sbuf2"
+addSignal -h 15 -UNSIGNED -HEX /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/sbuf0_V_2_U/address0[8:0]
+addSignal -h 15 -holdScope ce0
+addSignal -h 15 -holdScope we0
+addSignal -h 15 -UNSIGNED -HEX -holdScope d0[127:0]
+addGroup "G7"
+addSignal -h 15 -UNSIGNED -HEX /apatb_convolution_top/AESL_inst_convolution/grp_convolution_cnvProcessSingle_fu_1142/grp_convolution_processElement_fu_1288/obuf0_0_0_0_address1[8:0]
+addSignal -h 15 -holdScope obuf0_0_0_0_ce1
+addSignal -h 15 -holdScope obuf0_0_0_0_we1
+addSignal -h 15 -2COMP -UDEC -holdScope obuf0_0_0_0_d1[31:0]
+addGroup "G8"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+

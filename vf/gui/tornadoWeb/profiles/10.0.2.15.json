@@ -1,0 +1,94 @@
+{
+    "data_server": {
+        "http_port": 8020,
+        "data_port": "60000-65535",
+        "control_port": 21
+    },
+    "data_server_hosts": {
+        "10.0.2.15": "10.0.2.15"
+    },
+    "docker_registry": "10.0.2.15:5000",
+    "docker_api_server": {
+        "host": "10.0.2.15",
+        "port": 4232
+    },
+    "etcd_server": "10.0.2.15:2379",
+    "data_manager": {
+        "type": "dm",
+        "dm": {
+            "url": "http://zaip-data-manager:8030",
+            "manage_url": "10.0.2.15:30161",
+            "jnlp_url": "http://10.0.2.15:30162"
+        }
+    },
+    "file_server":{
+        "type": "3",
+        "file_uploader_url": "http://10.0.2.15:8090/amAgent",
+        "odpp": {
+            "url": "",
+            "space": "",
+            "data_base_dir": "",
+            "username": "",
+            "password": "",
+            "version": ""
+        }
+    },
+    "ingress" : {
+        "ingress_host": "10.0.2.15"
+    },
+    "mysql_server": {
+        "host": "10.0.2.15",
+        "port": 30999,
+        "username": "root",
+        "password": "db10$ZTE",
+        "backup_server": {
+            "host": "10.0.2.15",
+            "port": 22,
+            "username": "vagrant",
+            "password": "vagrant",
+            "mysqldump": "mysqldump",
+            "path": "/var/data/share/mysql-backup"
+        }
+    },
+    "kafka_bootstrap_servers": "broker:9092",
+    "kubernetes_api_server_port": 8080,
+    "kubernetes_master_host": "10.0.2.15",
+    "mongodb_server": {
+        "host": "mongo-service",
+        "port": 27017,
+        "username": "zteAI",
+        "password": "zteAI123!",
+        "encrypted_password": "ayUqePwsrH0StqpO+zqUgg=="
+    },
+    "nvidia_driver_path": "/usr/local/nvidia-docker-volumes/nvidia_driver/384.111",
+    "portal_host": "10.0.2.15",
+    "redis_server": {
+        "host": "redis-service",
+        "port": 6379,
+        "is_cluster": false,
+        "encrypted_password": "ayUqePwsrH0StqpO+zqUgg==",
+        "password": "zteAI123!"
+    },
+    "replicas": {
+	"app_controller": 1,
+        "app_controller_log": 1,
+        "assist": 1,
+        "proxy": 1,
+        "nginx": 1,
+        "data_agent": 1,
+        "data_manager": 1,
+        "download": 1,
+        "model_parser": 1,
+        "quota_manager": 1,
+        "service_manager": 1,
+        "service_manager_portal": 1,
+        "tenant_manager": 1
+    },
+    "resource_manager": {
+        "worker_cpu_ratio": 20
+    },
+    "workspace_path": "/var/data/share/am",
+    "workspace_server": "10.0.2.15",
+    "zaip_api_ip": "10.0.2.15",
+    "zaip_api_port": 8060
+}

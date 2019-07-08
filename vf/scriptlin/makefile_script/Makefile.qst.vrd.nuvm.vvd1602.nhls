@@ -1,0 +1,168 @@
+#*****************************************************************************
+# This is the makeflie to control the whole verification environment
+#
+# Author: Qiu Chao 
+# Date  : 2018/11/20
+#
+#*****************************************************************************
+
+-include Makefile.flist
+
+####COV_OPT
+USE_COV=1
+ifeq ($(USE_COV),1)
+    COV_OPT = -cover bces -incr
+else
+    COV_OPT =
+endif
+
+####USES_DPI
+USES_DPI=0
+ifeq ($(USES_DPI),1)
+  DPILIB_VLOG_OPT = 
+  DPILIB_VSIM_OPT = -sv_lib $(LIBDIR)/uvm_dpi 
+  DPILIB_TARGET = dpi_lib$(BITS)
+else
+  DPILIB_VLOG_OPT = +define+UVM_NO_DPI 
+  DPILIB_VSIM_OPT = 
+  DPILIB_TARGET =
+endif
+
+####LIB_MODE
+LIB_MODE= -L $(VVD1602_LIBRARY_PATH)/secureip \
+		-L $(VVD1602_LIBRARY_PATH)/simprims_ver \
+		-L $(VVD1602_LIBRARY_PATH)/unifast_ver \
+		-L $(VVD1602_LIBRARY_PATH)/unimacro_ver \
+		-L $(VVD1602_LIBRARY_PATH)/unisims_ver 
+
+####UVM_TESTNAME UVM_MODE_VLOG
+ifeq ($(PAR_UVM_TYPE),uvm)
+    UVM_TESTNAME =+UVM_TESTNAME=$(PAR_TC) 
+    UVM_MODE_VLOG=+incdir+$(UVM_HOME)/src \
+	        $(UVM_HOME)/src/uvm.sv 
+else
+    UVM_TESTNAME=#
+    UVM_MODE_VLOG=#
+endif
+
+####DDR3_MODE_VLOG
+ifeq ($(PAR_OTHER_TYPE),ddr3)
+    DDR3_MODE_VLOG=+define+x2Gb \
+				   +define+sg15E \
+				   +define+x16 
+else
+    DDR3_MODE_VLOG=#
+endif
+
+####VERDI_MODE_VSIM
+ifeq ($(PAR_WAVE_TYPE),vrd)
+    VERDI_MODE_VSIM =-vopt \
+					 -c \
+					 -pli \
+					 $(NOVAS_ROOT)/libpli.so 
+else
+    VERDI_MODE_VSIM =-novopt
+endif
+
+####preparation
+.PHONY:preparation
+preparation:vloglist
+
+##preparation: vloglist
+####Generate the Makfile.flist
+.PHONY:vloglist
+vloglist:
+	####Write the "VLOG_LIST := \" to the Makefile.flist
+	echo "VLOG_LIST := \\" 					> $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Get the flist to Makefile.flist,(such as xxx.v xxxx.sv,and so on)
+	find $(RTL_ROOT) 			-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Add \ in the end of line.(such as xxx.v conver to  xxx.v \ and so on)
+	####Attention:$ has other means in the makefile,so we use $$ instead of $.
+	####"\.v \\\" means ".v \"
+	sed -i "s/\.v$$/\.v \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.sv$$/\.sv \\\/g" $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Filter the (_bb.v,_inst.v ...)in the ipcore folder 
+	#### ".*" can math every char every length
+	sed -i '/ipcoresyn/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_bb/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_inst\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_xilinx\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; 
+
+####verdi 
+.PHONY:verdi
+verdi:
+	cd $(RUNSIM_ROOT)/run_$(PAR_TC)	; \
+	find $(RTL_ROOT) 			-name \*.v 	> $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.svh >>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresyn/d' 					$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_bb/d' 				$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_inst\./d' 			$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_xilinx\./d' 		$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	if [[ ! -e $(BTC_ROOT)/$(PAR_TC)/rc/cm.rc ]] ; then \
+    	verdi 	-rcFile $(VF_ROOT)/novas/novas.rc \
+				-f $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f \
+				-ssf  $(RUNSIM_ROOT)/run_$(PAR_TC)/tb_dut_top.fsdb & \
+	else \
+		verdi 	-rcFile $(VF_ROOT)/novas/novas.rc \
+				-f $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f \
+                -sswr $(BTC_ROOT)/$(PAR_TC)/rc/cm.rc \
+				-ssf  $(RUNSIM_ROOT)/run_$(PAR_TC)/tb_dut_top.fsdb & \
+    fi ; 
+
+####create_lib step 1
+.PHONY:create_lib_s1
+create_lib_s1:
+	vlib work ; \
+	vmap work work 
+
+####Test macro.v exist or not
+MACRO_RTL_FILE_PATH =$(MACRO_RTL_FILE)/macro.v
+ifeq ($(MACRO_RTL_FILE_PATH),$(wildcard $(MACRO_RTL_FILE_PATH)))
+    MACRO_OPT=+cover=bcesf+incdir+$(MACRO_RTL_FILE)  \
+		    	$(MACRO_RTL_FILE)/macro.v 
+else
+    MACRO_OPT=#
+endif
+
+####vlog files step 2
+.PHONY:vlog_s2
+vlog_s2:
+	vlog -sv \
+	$(DDR3_MODE_VLOG) \
+    $(UVM_MODE_VLOG) \
+	$(MACRO_OPT) \
+	+incdir+$(RTL_ROOT) \
+	+incdir+$(TB_ROOT) \
+	-timescale "1ns/1ns" \
+	$(DPILIB_VLOG_OPT) \
+	-writetoplevels questa.tops \
+    $(COV_OPT) \
+	$(VLOG_LIST) ; 
+
+#### vsim all step 3
+.PHONY:VSIM
+VSIM = 	vsim \
+		$(DPILIB_VSIM_OPT) \
+	   	$(LIB_MODE) \
+		$(VERDI_MODE_VSIM) \
+		-sva \
+		-assertdebug \
+		-coverage \
+		-printsimstats \
+	    -do "run -all ;coverage report -detail -cvg -directive -comments -file $(PAR_TC).txt -r /;coverage save $(PAR_TC).ucdb;q" \
+		-l questa.log \
+		-f questa.tops
+
+####sim  
+.PHONY:sim
+sim:create_lib_s1 vlog_s2
+	$(VSIM) $(UVM_TESTNAME); 
+
+
+##+incdir+$(BTC_ROOT)/$(PAR_TC) \ 

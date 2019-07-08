@@ -1,0 +1,241 @@
+#*****************************************************************************
+# This is the makeflie to control the whole verification environment
+#
+# Author: Qiu Chao 
+# Date  : 2018/11/20
+#
+#*****************************************************************************
+SHELL=/bin/bash
+
+-include Makefile.flist
+
+USE_COV=1
+ifeq ($(USE_COV),1)
+    COV_OPT = -cover bces -incr
+else
+    COV_OPT =
+endif
+
+lib_mode= -L $(VVD1602_LIBRARY_PATH)/secureip \
+		-L $(VVD1602_LIBRARY_PATH)/simprims_ver \
+		-L $(VVD1602_LIBRARY_PATH)/unifast_ver \
+		-L $(VVD1602_LIBRARY_PATH)/unimacro_ver \
+		-L $(VVD1602_LIBRARY_PATH)/unisims_ver 
+
+.PHONY:preparation
+preparation: mkdirfolder chautotbfile addcnnfile addfsdb linkfile vloglist
+
+autotbfile=$(shell find $(RTL_ROOT)/sim/verilog -name *.autotb.v)
+
+########Get the Key word from the config file.(such as rand,return rand)
+define getKeyWordFromFileFunc
+	$(findstring $(1),$(shell cat $(2)))
+endef
+
+RAND_KEY	=$(call getKeyWordFromFileFunc,randTmp,$(autotbfile))
+FSDB_KEY	=$(call getKeyWordFromFileFunc,fsdb,$(autotbfile))
+CNNFILE_KEY	=$(call getKeyWordFromFileFunc,__CNNFILE__,$(autotbfile))
+
+sim1:
+	echo -e "tst is $(autotbfile)" ; \
+	echo -e "RAND_KEY is $(RAND_KEY)" ; \
+	echo -e "FSDB_KEY is $(FSDB_KEY)" ; \
+	echo -e "FSDB_KEY_WORDS is $(words $(FSDB_KEY))" ; \
+	echo -e "PAR_WAVE_TYPE is $(PAR_WAVE_TYPE)" ; \
+	echo -e "Verdi is $(Verdi)" ; \
+	echo -e "it is sim dummy"
+
+####Modified the xxx.autotb.v
+.PHONY:linkfile
+linkfile:
+	cp -rf $(RTL_ROOT)/sim/verilog/*.dat $(RUNSIM_ROOT)/run_$(PAR_TC) ; \
+	ln -s $(RTL_ROOT)/sim/tv $(RUNSIM_ROOT)/tv 
+
+#cp -rf $(RTL_ROOT)/sim/verilog/*.dat $(RUNSIM_ROOT)/run_$(PAR_TC) 
+####Modified the xxx.autotb.v
+####change rand to randTmp only one Time
+####change continue to continueTmp only one Time
+.PHONY:chautotbfile
+chautotbfile:
+	@if [[ ! -d $(RTL_ROOT)/sim ]] ; then \
+	   	echo -e "\033[0;31m it should have $(RTL_ROOT)/sim path , when you simulate hls project \033[0m" ; \
+	else \
+		if [[ ! -d $(RTL_ROOT)/sim/verilog ]] ; then \
+	   		echo -e "\033[0;31m it should have $(RTL_ROOT)/sim/verilog path , when you simulate hls project \033[0m" ; \
+		else \
+			if [[ ! -e $(autotbfile) ]] ; then \
+	   			echo -e "\033[0;31m it should have $(autotbfile) file , when you simulate hls project \033[0m" ; \
+			else \
+	    		if [[ $(words $(RAND_KEY)) == 0 ]] ; then \
+	   				echo -e "modified rand to randTmp " ; \
+	   				echo -e "modified continue to continueTmp " ; \
+					sed -i "s/rand/randTmp/g"   $(autotbfile) ; \
+					sed -i "s/continue/continueTmp/g"   $(autotbfile) ; \
+				fi ; \
+			fi ; \
+		fi ; \
+	fi ; 
+
+####Add fsdb to xxx.autotb.v
+####initial begin
+#### $helloword;
+#### $fsdbDumpvars("+fsdbfile+tb_dut_top.fsdb");
+#### $fsdbDumpSVA; 
+####end
+.PHONY:addfsdb
+addfsdb:
+	@if [[ ! -e $(autotbfile) ]] ; then \
+		echo -e "\033[0;31m it should have $(autotbfile) file , when you simulate hls project \033[0m" ; \
+	else \
+		echo -e "tst is $(autotbfile)" ; \
+		if [[ ($(PAR_WAVE_TYPE) == $(Verdi)) ]] && [[ ($(words $(FSDB_KEY)) == 0 ) ]] ; then \
+	   		echo -e "add fsdb to the $(autotbfile)" ; \
+			sed -i "s/endmodule//g"   $(autotbfile) ; \
+			echo 'initial begin' >> $(autotbfile) ; \
+			echo '	$$helloword;' >> $(autotbfile) ; \
+			echo '	$$fsdbDumpvars("+fsdbfile+tb_dut_top.fsdb");' >> $(autotbfile) ; \
+			echo '	$$fsdbDumpSVA;' >> $(autotbfile) ; \
+			echo 'end' >> $(autotbfile) ; \
+			echo 'endmodule' >> $(autotbfile) ; \
+		fi ; \
+	fi ;
+
+.PHONY:addcnnfile
+addcnnfile:
+	@if [[ ! -e $(autotbfile) ]] ; then \
+		echo -e "\033[0;31m it should have $(autotbfile) file , when you simulate hls project \033[0m" ; \
+	else \
+		echo -e "tst is $(autotbfile)" ; \
+		if [[ ($(PAR_WAVE_TYPE) == $(Verdi)) ]] && [[ ($(words $(CNNFILE_KEY)) == 0 ) ]] ; then \
+	   		echo -e "add cnn file to the $(autotbfile)" ; \
+			sed -i "s/endmodule//g"   $(autotbfile) ; \
+            echo 'initial begin' >> $(autotbfile) ; \
+            echo '    //__CNNFILE__'>>$(autotbfile) ; \
+            echo '    integer fp;' >> $(autotbfile) ; \
+            echo '    fp = $$fopen("cnna.log", "w");' >> $(autotbfile) ; \
+            echo '    while(1)begin' >> $(autotbfile) ; \
+            echo '        @(negedge AESL_clock);' >> $(autotbfile) ; \
+            echo '        #1ns;' >> $(autotbfile) ; \
+            echo '        if(FOUT_DDR_WREADY && FOUT_DDR_WVALID)begin' >> $(autotbfile) ; \
+            echo '            $$fdisplay(fp, "%4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d"' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[  7:  0]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 15:  8]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 23: 16]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 31: 24]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 39: 32]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 47: 40]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 55: 48]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 63: 56]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 71: 64]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 79: 72]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 87: 80]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[ 95: 88]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[103: 96]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[111:104]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[119:112]' >> $(autotbfile) ; \
+            echo '            ,FOUT_DDR_WDATA[127:120]);' >> $(autotbfile) ; \
+            echo '        end' >> $(autotbfile) ; \
+            echo '    end' >> $(autotbfile) ; \
+            echo '    $$fclose(fp);' >> $(autotbfile) ; \
+            echo 'end' >> $(autotbfile) ; \
+			echo 'endmodule' >> $(autotbfile) ; \
+		fi ; \
+	fi ;
+
+####mkdir folder for $(BTC_ROOT)/$(PAR_TC)
+.PHONY:mkdirfolder
+mkdirfolder:
+	@if [[ ! -d $(BTC_ROOT)/$(PAR_TC) ]]; then \
+		mkdir $(BTC_ROOT)/$(PAR_TC) ; \
+	fi ;
+
+
+####Generate the Makfile.flist
+.PHONY:vloglist
+vloglist:
+	####Write the "VLOG_LIST := \" to the Makefile.flist
+	@echo "VLOG_LIST := \\" 					> $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Get the flist to Makefile.flist,(such as xxx.v xxxx.sv,and so on)
+	find $(RTL_ROOT) 			-name \*.vh >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Add \ in the end of line.(such as xxx.v conver to  xxx.v \ and so on)
+	####Attention:$ has other means in the makefile,so we use $$ instead of $.
+	####"\.v \\\" means ".v \"
+	sed -i "s/\.vh$$/\.vh \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.v$$/\.v \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.sv$$/\.sv \\\/g" $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Filter the (_bb.v,_inst.v ...)in the ipcore folder 
+	#### ".*" can math every char every length
+	sed -i '/ipcoresyn/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_bb/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_inst\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_xilinx\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; 
+
+####Test macro.v exist or not
+MACRO_RTL_FILE_PATH =$(MACRO_RTL_FILE)/macro.v
+ifeq ($(MACRO_RTL_FILE_PATH),$(wildcard $(MACRO_RTL_FILE_PATH)))
+    MACRO_SIM_OPT=+cover=bcesf+incdir+$(MACRO_RTL_FILE)  \
+					$(MACRO_RTL_FILE)/macro.v 
+else
+    MACRO_SIM_OPT=#
+endif
+
+####sim
+.PHONY:sim
+sim:
+	vlib work ; \
+	vmap work work ; \
+	vlog -sv +define+x2Gb \
+	+define+sg15E \
+	+define+x16 \
+	+incdir+$(RTL_ROOT) \
+	-writetoplevels questa.tops \
+    $(MACRO_SIM_OPT) \
+    $(COV_OPT) \
+	$(VLOG_LIST) ; \
+	$(VSIM) ; 
+
+.PHONY:VSIM
+VSIM = 	vsim \
+	   	$(lib_mode) \
+	   	-novopt \
+		-sva \
+		-assertdebug \
+        -c \
+		-pli \
+		$(NOVAS_ROOT)/libpli.so \
+       -coverage \
+       -printsimstats \
+	    -do "run -all ;coverage report -detail -cvg -directive -comments -file $(PAR_TC).txt -r /;coverage save $(PAR_TC).ucdb;q" \
+		-l questa.log \
+		-f questa.tops
+
+#work.tb_dut_top \
+		glbl \
+
+.PHONY:verdi
+verdi:
+	cd $(RUNSIM_ROOT)/run_$(PAR_TC)	; \
+	find $(RTL_ROOT) 			-name \*.v 	> $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.svh >>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresyn/d' 					$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_bb/d' 				$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_inst\./d' 			$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_xilinx\./d' 		$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	if [[ ! -e $(BTC_ROOT)/$(PAR_TC)/rc/cm.rc ]] ; then \
+    	verdi 	-rcFile $(VF_ROOT)/novas/novas.rc \
+				-f $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f \
+				-ssf  $(RUNSIM_ROOT)/run_$(PAR_TC)/tb_dut_top.fsdb & \
+	else \
+		verdi 	-rcFile $(VF_ROOT)/novas/novas.rc \
+				-f $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f \
+                -sswr $(BTC_ROOT)/$(PAR_TC)/rc/cm.rc \
+				-ssf  $(RUNSIM_ROOT)/run_$(PAR_TC)/tb_dut_top.fsdb & \
+    fi ;   
+

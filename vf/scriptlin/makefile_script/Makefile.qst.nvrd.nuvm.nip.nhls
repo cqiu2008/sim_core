@@ -1,0 +1,65 @@
+#*****************************************************************************
+# This is the makeflie to control the whole verification environment
+#
+# Author: Qiu Chao 
+# Date  : 2018/11/20
+#
+#*****************************************************************************
+
+-include Makefile.flist
+
+USE_COV=1
+ifeq ($(USE_COV),1)
+    COV_OPT = -cover bces -incr
+else
+    COV_OPT =
+endif
+
+.PHONY:preparation
+preparation: vloglist
+
+####Generate the Makfile.flist
+.PHONY:vloglist
+vloglist:
+	####Write the "VLOG_LIST := \" to the Makefile.flist
+	echo "VLOG_LIST := \\" 					> $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Get the flist to Makefile.flist,(such as xxx.v xxxx.sv,and so on)
+	find $(RTL_ROOT) 			-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Add \ in the end of line.(such as xxx.v conver to  xxx.v \ and so on)
+	####"\.v \\\" means ".v \"
+	sed -i "s/\.v/\.v \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.sv/\.sv \\\/g" $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Filter the (_bb.v,_inst.v ...)in the ipcore folder 
+	#### ".*" can math every char every length
+	sed -i '/ipcoresyn/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_bb/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_inst\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_xilinx\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; 
+
+####Test macro.v exist or not
+MACRO_RTL_FILE_PATH =$(MACRO_RTL_FILE)/macro.v
+ifeq ($(MACRO_RTL_FILE_PATH),$(wildcard $(MACRO_RTL_FILE_PATH)))
+    MACRO_OPT=+cover=bcesf+incdir+$(MACRO_RTL_FILE)  \
+		    	$(MACRO_RTL_FILE)/macro.v 
+else
+    MACRO_OPT=#
+endif
+
+sim:
+	vlib work ; \
+	vmap work work ; \
+    $(COV_OPT) \
+	vlog $(MACRO_OPT) \
+	$(VLOG_LIST) ; \
+	$(VSIM) ; 
+
+VSIM = vsim \
+	   -novopt \
+	   work.tb_dut_top \
+       -coverage \
+       -printsimstats \
+	    -do "log -r \* ; add wave /* ; run -all ;coverage report -detail -cvg -directive -comments -file $(PAR_TC).txt -r /;coverage save $(PAR_TC).ucdb;" 
+

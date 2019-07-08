@@ -1,0 +1,4 @@
+sed -i "s/rtl\\\\\\\//g" ./TB_J2K_Decoder_Top.v
+sed -i "s/rtl\\\\\\\//g" ./J2K_BitStream_Ram.v
+sed -i "s/rtl\\\\\\\//g" ./TB_OK单色+彩色/TB_J2K_Decoder_Top.v
+sed -i "s/rtl\\\\\\\//g" ./Frame_Ram.v

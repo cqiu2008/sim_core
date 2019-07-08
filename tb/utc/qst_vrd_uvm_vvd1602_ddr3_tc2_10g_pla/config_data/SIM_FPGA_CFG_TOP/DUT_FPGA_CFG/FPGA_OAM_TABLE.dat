@@ -1,0 +1,63 @@
+//====OAM table begin
+
+010_4000_0010_0000_0000 //up normal,min_mel=1,max_mel=2,  
+011_4000_0030_0000_0000 //up normal,min_mel=1,max_mel=6, 
+012_4000_0010_0000_0000 //up normal,min_mel=1,max_mel=6, 
+013_4000_0010_0000_0000 //up normal,min_mel=1,max_mel=2, 
+
+018_4000_0038_0000_0091 //up mep,min_mel=1,max_mel=7,tl_min_mel_lck_ind  
+019_4000_0038_0000_0051 //up mep,min_mel=1,max_mel=7,tl_min_mel_hard_ind
+01a_4000_0038_0000_0011 //up mep,min_mel=1,max_mel=7, 
+01b_4000_0030_0000_0011 //up mep,min_mel=1,max_mel=6, 
+01c_4000_0030_0000_0011 //up mep,min_mel=1,max_mel=6, 
+
+064_0000_0000_0000_0000 //normal
+065_0000_0000_0000_0001 //mep
+066_0000_0000_0000_0002 //mip
+067_0000_0000_0000_0002 //mip 
+068_0000_0018_0000_001c //mep1+mip2,LEV2>LEV1
+
+080_0000_0000_0000_0012 //mip,min_mel=2, 
+081_0000_0000_0000_003a //mip,min_mel=2, 
+082_0000_0000_0000_003a //mip,min_mel=2, 
+
+0a0_0000_0010_0000_000c //mep1+mip2,min_mel=1, 
+0a1_0000_0038_0000_000c //mep1+mip2,min_mel=1,max_mel=7, 
+0a2_0000_0010_0000_000c //mep1+mip2,min_mel=1,max_mel=6, 
+0a3_0000_0010_0000_000c //mep1+mip2,min_mel=1,max_mel=2, 
+
+0b0_0000_0010_0000_000c //mep1+mip2,min_mel=1,max_mel=2,  
+0b1_0000_0030_0000_000c //mep1+mip2,min_mel=1,max_mel=6, 
+0b2_0000_0010_0000_000c //mep1+mip2,min_mel=1,max_mel=6, 
+0b3_0000_0010_0000_000c //mep1+mip2,min_mel=1,max_mel=2, 
+
+0c0_0000_0010_0000_000b //mep1+mep2,min_mel=1,max_mel=2,  
+0c1_0000_0030_0000_000b //mep1+mep2,min_mel=1,max_mel=6, 
+0c2_0000_0010_0000_000b //mep1+mep2,min_mel=1,max_mel=6, 
+0c3_0000_0010_0000_000b //mep1+mep2,min_mel=1,max_mel=2, 
+
+064_0000_0000_0000_0001
+//310_0512_3574_9845_1435
+//fff_0999_daf2_350a_bc92
+//====End tag(id 12bit+value 64bit = 76bit)
+fff_ffff_ffff_ffff_ffff
+
+//===oam table
+//	tl_node_type=oam_table_value[2:0];
+//	tl_min_mel=oam_table_value[5:3];
+//	tl_min_mel_hard_ind=oam_table_value[6];
+//	tl_min_mel_lck_ind=oam_table_value[7];
+//	tl_min_mel_ccm_vlan_pri=oam_table_value[10:8];
+//	tl_min_mel_lm_vlan_pri=oam_table_value[13:11];
+//	tl_min_mel_mep_num=oam_table_value[23:14];
+//	tl_min_mel_oam_id=oam_table_value[28:24];
+//	tl_min_mel_lev_tst_ind=oam_table_value[29];
+//	tl_max_mel=oam_table_value[37:35];
+//	tl_max_mel_hard_ind=oam_table_value[38];
+//	tl_max_mel_lck_ind=oam_table_value[39];
+//	tl_max_mel_ccm_vlan_pri=oam_table_value[42:40];
+//	tl_max_mel_lm_vlan_pri=oam_table_value[45:43];
+//	tl_max_mel_mep_num=oam_table_value[55:46];
+//	tl_max_mel_oam_id=oam_table_value[60:56];
+//	tl_max_mel_lev_tst_ind=oam_table_value[61];
+//	tl_resp_mep_type=oam_table_value[62];

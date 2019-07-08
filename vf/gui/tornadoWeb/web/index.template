@@ -1,0 +1,1648 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>10G/1G 以太网发包器</title>
+<!-- javascript using extern file-->
+<script type="text/javascript" src='script/dynamicTable.js'></script>
+<script type="text/javascript" src='script/jQuery.js'></script>
+<!-- javascript using internal code-->
+<script type="text/javascript" language="javascript">
+</script>
+<!-- css using internal code-->
+<style type="text/css">
+h1,h2,tbody,body,div{text-align:center;}
+.cssPrivateTdContent
+{
+	text-align:left;
+	width:250px
+}
+.cssPrivateInputTxtValue
+{
+	text-align:left;
+	width:250px
+}
+.cssPublicTdNumber
+{
+	text-align:center;
+}
+.cssPublicTdContent
+{
+	text-align:left;
+}
+.cssPublicInputTxtContent
+{
+	text-align:left;
+}
+td {font-size: 12px;
+	line-height:160%;
+	text-align:center;
+	}
+</style>
+</head>
+<!--   body   -->
+<body onload="initLoad()">
+	<h1> 10G/1G 以太网发包器 </h1>
+	<h2><FONT size="5"> 全局 流参数配置 </FONT></h2>
+	<table align="center" id="ethPublicPckTable" style="display:;text-align:center" width="800" border="0" cellspacing="2" cellpadding="0">
+		<tbody>
+			<tr >
+				<td valign="center" bgcolor="#CCCCCC">序号</td>
+				<td onclick="publicTableShow('ethPublicPckTable')" style="color:green"  valign="center" bgcolor="#CCCCCC">描述 >></td>
+				<td valign="center" bgcolor="#CCCCCC">数值</td>
+			</tr>
+			<tr >
+				<td class="cssPublicTdNumber" > 1 </td>
+				<td class="cssPublicTdContent" >[1B][十进制]使能流数目（0-255个）</td>
+				<td ><input class="cssPublicInputTxtContent" type="text" value=""/> </td> 
+			</tr>
+			<tr >
+				<td class="cssPublicTdNumber" > 2 </td>
+				<td class="cssPublicTdContent" >[4B][十进制]灌包数量（0-4G个）</td>
+				<td ><input class="cssPublicInputTxtContent" type="text" value=""/> </td>
+			</tr>
+			<tr >
+				<td class="cssPublicTdNumber"> 3 </td>
+				<td class="cssPublicTdContent" >[2B][十进制]灌包流量（0-10000M）</td>
+				<td ><input class="cssPublicInputTxtContent" type="text" value=""/></td>
+			</tr>
+			<tr >
+				<td class="cssPublicTdNumber" > 4 </td>
+				<td class="cssPublicTdContent" >[2B][十进制]持续猝发传输包数量（0-65536个）</td>
+				<td ><input type="text" value=""/></td>
+			</tr>
+			<tr >
+				<td class="cssPublicTdNumber" > 5 </td>
+				<td class="cssPublicTdContent" >[4B][十进制]猝发传输起始帧号（第0-4G个）</td>
+				<td ><input class="cssPublicInputTxtContent" type="text" value=""/></td>
+			</tr>
+			<tr >
+				<td class="cssPublicTdNumber" > 6 </td>
+				<td class="cssPublicTdContent" >[4B][十进制]猝发传输结束帧号（第0-4G个）</td>
+				<td ><input class="cssPublicInputTxtContent" type="text" value=""/></td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- <button style="display:;color:green" onclick="publicTableCheck('ethPublicPckTable')"> 提交 </button> -->
+	<h2> 单条 流参数配置</h2>
+	<p>
+		<form>
+		<!--select-->
+		TestCaseName:
+		<select name="testcase" onchange="updateCfgFilePath(this,'cfgFilePath')"> <!--add_tag-->
+<option>tc1_dummy</option>		</select>
+		<br>
+		配置文件保存路径：
+<input type="text" id="cfgFilePath" size="80" maxlength="185" value="SimEthStream.dat">		<!-- <input type="text" id="cfgFilePath" size="60" maxlength="185" value="xxxxx"> -->
+		</form>
+		<br>
+		<button width="600" border="0" cellspacing="2" cellpadding="0" onclick="addInstanceRow('ethPrivatePckTable')"> 添加 </button>
+		<button onclick="deleteEndRow('ethPrivatePckTable')"> 删除 </button>
+		<button onclick="submitRun(	'cfgFilePath',
+									'ethPublicPckTable',
+									'ethPrivatePckTable')"> 提交 </button>
+	</p>
+	<table align="center" id="ethPrivatePckTable" width="800" border="0" cellspacing="2" cellpadding="0">
+		<tbody>
+			<tr >
+				<td style="color:" valign="center" bgcolor="#CCCCCC">流序号</td>
+				<td valign="center" bgcolor="#CCCCCC">流基本类型</td>
+				<td valign="center" bgcolor="#CCCCCC">流细节</td>
+			</tr>
+			<tr style="display:none;color:" bgcolor="#CCCCCE">
+				<td valign="center" bgcolor="#FFFFFF"> 1 </td>
+				<td valign="center" bgcolor="#FFFFFF">
+					<select onchange="show(this.value)">
+						<option value="[0] L2 Common" selected="selected">L2 COMMON</option>
+						<option value="[1] L2 PDU 1588">L2 PDU 1588</option>
+						<option value="[2] L3 PDU 1588">L3 PDU 1588</option>
+						<option value="[3] OAM-CCM">OAM-CCM </option>
+						<option value="[4] OAM-LMM/LMR">OAM-LMM/LMR </option>
+						<option value="[5] OAM-DMM/DMR">OAM-DMM/DMR </option>
+						<option value="[6] OAM-1DM">OAM-1DM </option>
+						<option value="[7] OAM-1DM">OAM-OTHER </option>
+						<option value="[8] ipv4">IPV4</option>
+						<option value="[9] ipv6">IPV6</option>
+					</select>
+				</td>
+				<!--  detailTag -->
+				<td style="color:green" height="30" valign="center" bgcolor="#f5f9ed"
+					onclick="detailShow(this)"> detail </td>
+				</td>
+				<!--Type 1  Begin L2 packet-->
+				<td style="display:none" height="30" width="600" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)" ><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 f2"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'sub head mem')" >
+							<b> [2B][HEX]sub head size </b></td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[0] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="01 02 03 04 05 06 07 08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[1] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="11 12 13 14 15 16 17 18"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="21 22 23 24 25 26 27 28"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="31 32 33 34 35 36 37 38"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="41 42 43 44 45 46 47 48"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="51 52 53 54 55 56 57 58"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="61 62 63 64 65 66 67 68"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="71 72 73 74 75 76 77 78"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[8] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 82 83 84 85 86 87 88"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[9] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 92 93 94 95 96 97 98"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[10] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="a1 a2 a3 a4 a5 a6 a7 a8"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[11] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="b1 b2 b3 b4 b5 b6 b7 b8"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[12] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="c1 c2 c3 c4 c5 c6 c7 c8"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[13] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d1 d2 d3 d4 d5 d6 d7 d8"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[14] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="e1 e2 e3 e4 e5 e6 e7 e8"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]sub head mem[15] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="f1 f2 f3 f4 f5 f6 f7 f8"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 1  End L2 -->
+				<!--Type 2  Begin 1588 L2 PDU-->
+				<td style="display:none" height="30" width="600" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)" ><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 0a"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 f7"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX]sub head size </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 22"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'PTP')" >
+								<b> PTP [1B][HEX]transportSpecific 4b,<br>messageType 4b(0x0,0x8,0x1,0x9) >> </b> </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="31"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX]reserved1 4b,<br>versionPTP 4b(0x2)</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [2B][HEX] messageLength </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX] domainNumber</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX] reserved2 </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [2B][HEX] flagField </td>
+							<td  ><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="background-color:#90ee90;"> PTP [8B][HEX]correctionField  </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="08 07 06 05 04 03 02 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="background-color:#90ee90;"> PTP [4B][HEX]reserved </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="08 07 06 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [10B][HEX]sourcePortIdentity </td>
+							<td  ><input class="cssPrivateInputTxtValue" type="text" value="0A 09 08 07 06 05 04 03 02 01 "/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [2B][HEX]sequenceID </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX]controlField </td>
+							<td><input class="cssPrivateInputTxtValue" type="text"  value="33"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX]logMessageInterval</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text"  value="44"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 2  End1588 L2 PDU-->
+				<!--Type 3  Begin 1588 L3 PDU-->
+				<td style="display:none" height="30" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)"><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 0a"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="08 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX]sub head size </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 3E"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'IP_Header')" >
+								<b> [1B][HEX] IP_Header <br> version 4b(0x4),IHL 4b >> </b></td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] IP_Header:Type </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] IP_Header:total length </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] IP_Header:identification </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] IP_Header:flag 4b ,<br> fragment offset 12 b </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] IP_Header:ttl </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] IP_Header:protocol </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="11"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] IP_Header:header checksum </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] IP_Header:sip </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="14 13 12 11"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] IP_Header:dip </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="24 23 22 21"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'UDP_Header')" >
+								<b>	[2B][HEX] UDP_Header source port >> </b> </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] UDP_Header dest port </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="01 3f"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] UDP_Header length </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 34"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] UDP_Header checksum </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'PTP')" >
+								<b> PTP [1B][HEX]transportSpecific 4b,<br>messageType 4b(0x0,0x8,0x1,0x9) >> </b> </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="31"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX]reserved1 4b,<br>versionPTP 4b(0x2)</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [2B][HEX] messageLength </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX] domainNumber</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX] reserved2 </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [2B][HEX] flagField </td>
+							<td  ><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="background-color:#90ee90;"> PTP [8B][HEX]correctionField  </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="08 07 06 05 04 03 02 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="background-color:#90ee90;"> PTP [4B][HEX]reserved </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="08 07 06 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [10B][HEX]sourcePortIdentity </td>
+							<td  ><input class="cssPrivateInputTxtValue" type="text" value="0A 09 08 07 06 05 04 03 02 01 "/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [2B][HEX]sequenceID </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX]controlField </td>
+							<td><input class="cssPrivateInputTxtValue" type="text"  value="33"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > PTP [1B][HEX]logMessageInterval</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text"  value="44"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 3  End 1588 L3 PDU-->
+				<!--Type 4  Begin OAM CCM packet-->
+				<td style="display:none" height="30" width="600" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)" ><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 0a"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 64"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="fe 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'CCM')" >
+							<b> [2B][HEX]sub head size </b></td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 4B"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]CCM-MEL/Version</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]CCM-opcode(0x01)</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]CCM-Flag/rdi/ </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]CCM-TLV Offset(0x70)</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="70"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX]CCM-Sequence Number </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="04 03 02 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX]CCM-MEP ID </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="12 11"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [48B][HEX]CCM-MEG ID </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX]CCM-TxFCf</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="04 03 02 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX]CCM-RxFCb </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="14 13 12 11"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX]CCM-TxFCb </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="24 23 22 21"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX]CCM-Reserved </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="34 33 32 31"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]CCM-End TLV 0 </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 4  End OAM CCM packet -->
+				<!--Type 5  Begin OAM LMM/LMR packet-->
+				<td style="display:none" height="30" width="600" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)" ><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 15"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 64"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="fe 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'LMM/LMR')" >
+							<b> [2B][HEX]sub head size </b></td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 4B"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]LMM/LMR-MEL/Version</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]LMM/LMR-opcode(43d=0x2b)</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="2B"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]LMM/LMR-Flag/rdi/ </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]LMM/LMR-TLV Offset(0x12)</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="12"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX]LMM/LMR-TxFCf</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="04 03 02 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX]LMM/LMR-RxFCf </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="14 13 12 11"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX]LMM/LMR-TxFCb </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="24 23 22 21"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]LMM/LMR-End TLV 0 </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX]LMM/LMR-Reserved </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="34 33 32 31"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 5  End OAM LMM/LMR packet -->
+				<!--Type 6  Begin OAM DMM/DMR packet-->
+				<td style="display:none" height="30" width="600" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)" ><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 64"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="fe 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'DMM/DMR')" >
+							<b> [2B][HEX]sub head size </b></td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 4B"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]DMM/DMR-MEL/Version</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]DMM/DMR-opcode(DMM:47=0x2f DMR:46=0x2e)</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="2f"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]DMM/DMR-Flag/rdi/ </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]DMM/DMR-TLV Offset(0x32)</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="32"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]DMM/DMR-TxTimeStampf</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="08 07 06 05 04 03 02 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]DMM/DMR-RxTimeStampf</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="18 17 16 15 14 13 12 11"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]DMM/DMR-TxTimeStampb</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="28 27 26 25 24 23 22 21"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]DMM/DMR-RxTimeStampb</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="38 37 36 35 34 33 32 31"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]DMM/DMR-End TLV 0 </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 6  End OAM DMM/DMR packet -->
+				<!--Type 7  Begin OAM 1DM packet-->
+				<td style="display:none" height="30" width="600" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)" ><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 15"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 64"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="fe 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'1DM')" >
+							<b> [2B][HEX]sub head size </b></td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 15"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]1DM-MEL/Version</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]1DM-opcode(45=0x2d)</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="2d"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]1DM-Flag/rdi/ </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]1DM-TLV Offset(0x16)</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="16"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]1DM-TxTimeStampf</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="08 07 06 05 04 03 02 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [8B][HEX]1DM-RxTimeStampf</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="18 17 16 15 14 13 12 11"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]1DM-End TLV 0 </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 7  End OAM 1DM packet -->
+				<!--Type 8  Begin OAM Other packet-->
+				<td style="display:none" height="30" width="600" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)" ><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 28"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 64"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="fe 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'OTHER')" >
+							<b> [2B][HEX]sub head size </b></td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]OTHER-MEL/Version</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]OTHER-opcode(0x45)</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="45"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 8  End OAM Other packet -->
+				<!--Type 9  Begin IPV4 packet-->
+				<td style="display:none" height="30" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)"><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 2a"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="08 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX]sub head size </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 3E"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'IPV4')" >
+								<b> [1B][HEX] IPV4 <br> version 4b(0x4),IHL 4b >> </b></td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] IPV4:Type </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] IPV4:total length </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] IPV4:identification </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] IPV4:flag 4b ,<br> fragment offset 12 b </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] IPV4:Time to Live </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] IPV4:Protocol </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="11"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] IPV4:Header Checksum </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] IPV4:Source Address </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="14 13 12 11"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] IPV4:Dest Address </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="24 23 22 21"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] IPV4:Option+Padding </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="e4 e3 e2 e1"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 9  End IPV4 packet-->
+				<!--Type 10 Begin IPV6 packet-->
+				<td style="display:none" height="30" bgcolor="#f5f9ed">
+					<table >
+						<caption style="color:green" onclick="detailShow(this)"><b> >> 10G/1G Ethernet Packet Generator </b></caption>
+						<tr>
+							<td> Name  </td>
+							<td> Value </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] packet port number (b5-b4) set err (b3-b0:crc,pload,sfd,preamble,=1)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] packet Frequency </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set type <br>
+								b3 (Length) =1:fix,=0:random <br>
+								b2-b0 (Pattern) b2:random,b1:fix,b0:inc </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="08"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] pload set length </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 2a"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set fix value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="f4"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] pload set inc value </td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length low</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00 40"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] random length high</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]Preamble_Type(b0=1,hc pkt)</td>
+							<td><input  class="cssPrivateInputTxtValue" type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX]sfd </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="d5"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX] Destination Mac</td>
+							<td><input  class="cssPrivateInputTxtValue"  type="text" value="00 00 01 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [6B][HEX]Source Mac</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 10 94 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'vlan word mem')" >
+								<b> [2B][HEX] vlan word size >> </b></td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[0]</td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="81 00 00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[1]</td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="81 00 00 01"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[2] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="91 00 00 02"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[3] </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="92 00 00 03"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[4] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 04"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[5] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 05"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[6] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 06"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [4B][HEX] vlan word mem[7] </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="88 a8 00 07"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] eth type </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="08 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX]sub head size </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="00 28"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" style="color:green" onclick="detailTdShow(this,'IPV6')" >
+								<b> [4B][HEX] IPV6 version 4b(0x6),<br>Traffic Class 8b, FL 20b>> </b></td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="60 00 00 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [2B][HEX] IPV6:Payload Length </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] IPV6:Next Header </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [1B][HEX] IPV6:Hop Limit </td>
+							<td><input class="cssPrivateInputTxtValue"  type="text" value="00 "/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [16B][HEX] IPV6:Source Address </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="0f 0e 0d 0c 0b 0a 09 08 07 06 05 04 03 02 01 00"/> </td>
+						</tr>
+						<tr>
+							<td class="cssPrivateTdContent" > [16B][HEX] IPV6:Dest Address </td>
+							<td><input class="cssPrivateInputTxtValue" type="text" value="1f 1e 1d 1c 1b 1a 19 18 17 16 15 14 13 12 11 10"/> </td>
+						</tr>
+					</table>
+				</td>
+				<!--Type 10  End IPV6 packet-->
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

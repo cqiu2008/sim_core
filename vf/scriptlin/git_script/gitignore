@@ -1,0 +1,5 @@
+/rtl/
+/runsim/
+!/runsim/makefile
+!/runsim/tc.cfg
+.gitignore

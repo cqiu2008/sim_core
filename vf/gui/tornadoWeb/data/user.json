@@ -1,0 +1,13 @@
+[
+{
+    "id": 1,
+    "name": "admin",
+    "role": "admin",
+    "password": "426baa111758bda8ca6191308815b762"
+},
+{
+    "id": 2,
+    "name": "fuzeyi",
+    "role": "guest",
+    "password": "ab8405332229a0fc38f3fe940147ad32"
+}]

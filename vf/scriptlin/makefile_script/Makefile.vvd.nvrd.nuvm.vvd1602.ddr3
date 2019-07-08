@@ -1,0 +1,95 @@
+#*****************************************************************************
+# This is the makeflie to control the whole verification environment
+#
+# Author: Qiu Chao 
+# Date  : 2018/11/20
+#
+#*****************************************************************************
+SHELL=/bin/bash
+
+-include Makefile.flist
+-include Makefile.xsim.lib.list
+
+####DDR3_MODE_VLOG
+ifeq ($(PAR_OTHER_TYPE),ddr3)
+    DDR3_MODE_VLOG=-d x2Gb -d sg15E -d x16
+else
+    DDR3_MODE_VLOG=#
+endif
+
+.PHONY:preparation
+preparation: xsimliblist vloglist xsimprj
+
+##########Get the testbench top name 
+TB_TOP_NAME=tb_dut_top
+
+####Generate the Makefile.xsim.lib.list for VVD_SIM_LIB
+.PHONY:xsimliblist
+xsimliblist:
+	@if [[ ! -e $(MAKEFILE_SCRIPT)/Makefile.xsim.lib.list ]]; then \
+	   	echo -e "\033[0;31m We havn't this $(MAKEFILE_SCRIPT)/Makefile.xsim.lib.list    \033[0m" ; \
+	else \
+		echo "RDI_DATADIR=$(VVD_DATA)" > $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.xsim.lib.list ; \
+		more $(MAKEFILE_SCRIPT)/Makefile.xsim.lib.list >> $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.xsim.lib.list ; \
+	fi ;
+		
+####Generate the Makfile.flist
+.PHONY:vloglist
+vloglist:
+	####Write the "VLOG_LIST := \" to the Makefile.flist
+	@echo "VLOG_LIST := \\" 					> $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Get the flist to Makefile.flist,(such as xxx.v xxxx.sv,and so on)
+	find $(RTL_ROOT) 			-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(VF_ROOT)/glbl    	-name \*.v  >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(TB_ROOT)/share 		-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Add \ in the end of line.(such as xxx.v conver to  xxx.v \ and so on)
+	####Attention:$ has other means in the makefile,so we use $$ instead of $.
+	####"\.v \\\" means ".v \"
+	sed -i "s/\.v$$/\.v \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.sv$$/\.sv \\\/g" $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Filter the (_bb.v,_inst.v ...)in the ipcore folder 
+	#### ".*" can math every char every length
+	sed -i '/ipcoresyn/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_bb/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_inst\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_xilinx\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; 
+
+####Generate the xsim.prj file
+.PHONY:xsimprj
+xsimprj:
+	##Get the .v and .sv file to xsim.prj
+	find $(RTL_ROOT) 			-name \*.v 	>$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	find $(TB_ROOT)/share 		-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##Delete the line with "/ipcoresyn/","ipcoresim..._bb",and so on.
+	sed -i '/ipcoresyn/d' 			    			$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	sed -i '/ipcoresim.*_bb/d' 		    			$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	sed -i '/ipcoresim.*_inst\./d' 	    			$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	sed -i '/ipcoresim.*_xilinx\./d'    			$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##When the line tail has .v , add "verilog xil_defaultlib ""on the line head.
+	sed -i '/\.v/ s/^/verilog xil_defaultlib \"/g'  $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##When the line tail has .sv , add "sv xil_defaultlib ""on the line head.
+	sed -i '/\.sv/ s/^/sv xil_defaultlib \"/g'   	$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##Add " in the end of every line.
+	sed -i 's/\.v/\.v\"/g' 							$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	sed -i 's/\.sv/\.sv\"/g' 						$(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##Add "verilog xil_defaultlib "$(VF_ROOT)/vf/glbl/glbl.v" to the xsim.prj
+	echo "verilog xil_defaultlib \"$(VF_ROOT)/glbl/glbl.v\""	>> $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	##Add "nosort" to the xsim.prj
+	echo "nosort"	>> $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; 
+
+.PHONY:sim
+sim:
+	xvlog -i $(RTL_ROOT) -i $(TB_ROOT) $(DDR3_MODE_VLOG) -d GLBL -sv -work worklib $(VLOG_LIST) ; \
+	xvlog -i $(RTL_ROOT) -i $(TB_ROOT) $(DDR3_MODE_VLOG) -d GLBL -prj $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj ; \
+	xelab -i $(RTL_ROOT) -i $(TB_ROOT) $(DDR3_MODE_VLOG) -debug all -prj $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj -s tb_dut_top.snapshot worklib.glbl worklib.$(TB_TOP_NAME) 
+	
+#xelab -i $(RTL_ROOT) -i $(TB_ROOT) $(DDR3_MODE_VLOG) $(VVD_SIM_LIB) -debug all -prj $(RUNSIM_ROOT)/run_$(PAR_TC)/xsim.prj -s tb_dut_top.snapshot worklib.glbl worklib.$(TB_TOP_NAME) 
+	
+#	xsim tb_dut_top.snapshot -gui -wdb xsim.wdb
+

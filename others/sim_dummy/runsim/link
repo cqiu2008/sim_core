@@ -1,0 +1,54 @@
+#!/bin/bash
+# Program:
+#			Save the zshrc , bashrc gvim and so on
+# History:
+# 2018/12/01	Qiu Chao First release
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+SIM_CORE_PATH=/home/cqiu/AIPrj/sim/sim_core
+
+funLinkFolder(){
+	if [[ ! -d $2 ]]; then
+		echo "origin create the path $2 "
+	else
+		rm -rf $2 
+		echo "delete and then create the path $1 "
+	fi
+	ln -s  $1 $2
+}
+
+funLinkFile(){
+	if [[ ! -e $2 ]]; then
+		echo "origin create the path $2 "
+	else
+		rm -rf $2 
+		echo "delete and then create the path $1 "
+	fi
+		ln -s  $1 $2
+}
+
+funCreateFolder(){
+	if [[ ! -d $1 ]]; then
+		mkdir $1
+	fi
+}
+
+funCpMode1(){
+	if [[ ! -e $2 ]]; then
+		cp -rf $1 $2 
+	fi
+}
+
+if [[ ! -d $SIM_CORE_PATH ]]; then 
+	echo "Error the $SIM_CORE_PATH does not exist "
+else
+	funCpMode1    $SIM_CORE_PATH/runsim/tc.cfg 		./tc.cfg 
+	funLinkFile   $SIM_CORE_PATH/runsim/makefile 	./makefile
+	funLinkFolder $SIM_CORE_PATH/doc				../doc
+	funLinkFolder $SIM_CORE_PATH/tb					../tb
+	funLinkFolder $SIM_CORE_PATH/version_rtl		../version_rtl
+	funLinkFolder $SIM_CORE_PATH/vf					../vf
+fi
+
+echo "Finished link $SIM_CORE_PATH" 
+

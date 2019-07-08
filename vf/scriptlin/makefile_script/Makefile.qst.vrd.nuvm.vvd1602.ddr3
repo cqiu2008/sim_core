@@ -1,0 +1,106 @@
+#*****************************************************************************
+# This is the makeflie to control the whole verification environment
+#
+# Author: Qiu Chao 
+# Date  : 2018/11/20
+#
+#*****************************************************************************
+
+-include Makefile.flist
+
+USE_COV=1
+ifeq ($(USE_COV),1)
+    COV_OPT = -cover bces -incr
+else
+    COV_OPT =
+endif
+
+lib_mode= -L $(VVD1602_LIBRARY_PATH)/secureip \
+		-L $(VVD1602_LIBRARY_PATH)/simprims_ver \
+		-L $(VVD1602_LIBRARY_PATH)/unifast_ver \
+		-L $(VVD1602_LIBRARY_PATH)/unimacro_ver \
+		-L $(VVD1602_LIBRARY_PATH)/unisims_ver 
+
+.PHONY:preparation
+preparation: vloglist
+
+####Generate the Makfile.flist
+.PHONY:vloglist
+vloglist:
+	####Write the "VLOG_LIST := \" to the Makefile.flist
+	echo "VLOG_LIST := \\" 					> $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Get the flist to Makefile.flist,(such as xxx.v xxxx.sv,and so on)
+	find $(RTL_ROOT) 			-name \*.vh >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Add \ in the end of line.(such as xxx.v conver to  xxx.v \ and so on)
+	####Attention:$ has other means in the makefile,so we use $$ instead of $.
+	####"\.v \\\" means ".v \"
+	sed -i "s/\.vh$$/\.vh \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.v$$/\.v \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.sv$$/\.sv \\\/g" $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Filter the (_bb.v,_inst.v ...)in the ipcore folder 
+	#### ".*" can math every char every length
+	sed -i '/ipcoresyn/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_bb/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_inst\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_xilinx\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; 
+
+####Test macro.v exist or not
+MACRO_RTL_FILE_PATH =$(MACRO_RTL_FILE)/macro.v
+ifeq ($(MACRO_RTL_FILE_PATH),$(wildcard $(MACRO_RTL_FILE_PATH)))
+    MACRO_OPT=+cover=bcesf+incdir+$(MACRO_RTL_FILE)  \
+		    	$(MACRO_RTL_FILE)/macro.v 
+else
+    MACRO_OPT=#
+endif
+
+.PHONY:sim
+sim:
+	vlib work ; \
+	vmap work work ; \
+	vlog -sv +define+x2Gb \
+	+define+sg15E \
+	+define+x16 \
+	+incdir+$(RTL_ROOT) \
+	+incdir+$(TB_ROOT) \
+	-writetoplevels questa.tops \
+	$(MACRO_OPT) \
+    $(COV_OPT) \
+	$(VLOG_LIST) ; \
+	$(VSIM) ; 
+
+.PHONY:VSIM
+VSIM = 	vsim \
+	   	$(lib_mode) \
+	   	-novopt \
+		-sva \
+		-assertdebug \
+        -c \
+		-pli \
+		$(NOVAS_ROOT)/libpli.so \
+       -coverage \
+       -printsimstats \
+	    -do "run -all ;coverage report -detail -cvg -directive -comments -file $(PAR_TC).txt -r /;coverage save $(PAR_TC).ucdb;q" \
+		-l questa.log \
+		-f questa.tops
+
+#work.tb_dut_top \
+		glbl \
+
+.PHONY:verdi
+verdi:
+	cd $(RUNSIM_ROOT)/run_$(PAR_TC)	; \
+	find $(RTL_ROOT) 			-name \*.v 	> $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresyn/d' 					$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_bb/d' 				$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_inst\./d' 			$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_xilinx\./d' 		$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+    verdi -rcFile $(VF_ROOT)/novas/novas.rc -f $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f -ssf  $(RUNSIM_ROOT)/run_$(PAR_TC)/tb_dut_top.fsdb &
+    
+

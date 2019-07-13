@@ -2,7 +2,7 @@ Magic 271485
 Revision Verdi3_I-2014.03-SP2
 
 ; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
-viewPort 0 30 1126 620 321 222
+viewPort 0 30 1061 488 220 177
 
 ; File list:
 ; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
@@ -16,16 +16,16 @@ signalSpacing 5
 
 ; windowTimeUnit is used for zoom, cursor & marker
 ; waveform viewport range
-zoom 6826648.025135 9954275.314183
-cursor 0.000000
-marker 0.000000
+zoom 0.000000 16750850.000000
+cursor 715200.000000
+marker 560000.000000
 
 ; user define markers
 ; userMarker time_pos marker_name color linestyle
 ; visible top row signal index
-top 9
+top 24
 ; marker line index
-markerPos 33
+markerPos 37
 
 ; event list
 ; addEvent event_name event_expression
@@ -67,8 +67,8 @@ addSignal -h 15 -holdScope BUSER[0:0]
 addSignal -h 15 -holdScope BVALID
 addSignal -h 15 -holdScope BREADY
 addSignal -h 15 -UNSIGNED -HEX -holdScope BRESP[1:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -holdScope ARID[0:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARADDR[31:0]
+addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/cnna_FIN_DDR_m_axi_U/wreq_throttl/clk
+addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 /apatb_cnna_top/AESL_inst_cnna/cnna_FIN_DDR_m_axi_U/ARID[0:0]
 addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARLEN[7:0]
 addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARSIZE[2:0]
 addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARBURST[1:0]
@@ -80,6 +80,17 @@ addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARREGION
 addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -holdScope ARUSER[0:0]
 addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -holdScope ARVALID
 addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -holdScope ARREADY
+addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARADDR[31:0]
+addSignal -h 15 -holdScope ACLK
+addSignal -h 15 /apatb_cnna_top/AESL_AXI_MASTER_FIN_DDR/FIFO_AR_req_full
+addSignal -h 15 -UNSIGNED -HEX /apatb_cnna_top/AESL_inst_cnna/cnna_FIN_DDR_m_axi_U/wreq_throttl/out_len[7:0]
+addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/cnna_FIN_DDR_m_axi_U/RID[0:0]
+addSignal -h 15 -holdScope RVALID
+addSignal -h 15 -holdScope RREADY
+addSignal -h 15 -UNSIGNED -HEX -holdScope RDATA[127:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope RRESP[1:0]
+addSignal -h 15 -holdScope RLAST
+addSignal -h 15 -holdScope RUSER[0:0]
 addGroup "G2"
 
 ; getSignalForm Scope Hierarchy Status

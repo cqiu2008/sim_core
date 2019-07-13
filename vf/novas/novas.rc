@@ -309,9 +309,9 @@ hb/fileWithNote.fm = 173,103,891,525
 openfile.fm = 100,72,723,524
 wave/wavePreview.fm = 100,72,920,711
 wave/restoreSig.fm = 100,72,723,524
+wave/saveSig.fm = 245,26,723,534
 hb/searchScope.fm = 100,100,624,643
 wave/getSignal.fm = 100,100,856,563
-wave/saveSig.fm = 245,54,723,534
 [General]
 autoSaveSession = FALSE
 TclAutoSource = 
@@ -447,16 +447,16 @@ savePropDtl = TRUE
 [QtDialog]
 importDesignForm = 509,132,634,611
 QwInfoMsgDlg = 357,287,750,250
-QwWarnMsgDlg = 66,14,1013,538
+QwWarnMsgDlg = 55,14,1013,538
 QwUserAskDlg = 820,412,324,146
 [Relationship]
 hideRecursiceNode = FALSE
 [Session Cache]
 4 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnna_vgg16/runsim/run_qst_vrd_nuvm_vvd1602_hls_tc10_vgg16/aa.ses
 5 = /home/cqiu/sim_hlsres50/runsim/run_qst_vrd_nuvm_vvd1602_hls_tc11_res50/verdiLog/novas_autosave.ses
-3 = /home/cqiu/sim_hlsres50/runsim/run_qst_vrd_nuvm_vvd1602_hls_tc11_res50/verdiLog/novas_autosave.ses
-2 = /home/cqiu/work/prj/AIPrj/sim/sim_cnna190610b/runsim/run_qst_vrd_nuvm_vvd1602_hls_190610b/verdiLog/novas_autosave.ses
-1 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaFK/runsim/run_qst_vrd_nuvm_vvd1602_hls_FK/verdiLog/novas_autosave.ses
+3 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaRAM/runsim/run_qst_vrd_nuvm_vvd1602_hls_190530bb/verdiLog/novas_autosave.ses
+1 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaFK-tmp/runsim/run_qst_vrd_nuvm_vvd1602_hls_FK/verdiLog/novas_autosave.ses
+2 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaRAM/runsim/run_qst_vrd_nuvm_vvd1602_hls_190530bb/verdiLog/novas_autosave.ses
 [Signal List]
 sigListBackgroundColor = ID_GRAY6
 sigListForegroundColor = ID_BLACK
@@ -636,7 +636,7 @@ pdmlCommand = ID_BLACK
 pdmlMacro = ID_BLACK
 font = FIXED14
 [Text.1]
-viewport = 55 -14 1375 876 45
+viewport = 65 24 1375 876 45
 [TextPrinter]
 Orientation = Landscape
 Indicator = FALSE
@@ -736,7 +736,7 @@ scope_to_save_with_macro
 open_file_dir
 open_rc_file_dir
 getSignalForm = 100 100 856 563 200 439 400 120
-viewPort = 0 30 1126 620 321 222
+viewPort = 0 30 1014 438 220 177
 signalSpacing = 5
 digitalSignalHeight = 15
 analogSignalHeight = 98
@@ -1407,7 +1407,7 @@ AddImportArgument = FALSE
 LineBreakWithScope = TRUE
 StopAfterCompileOption = -s
 [wave.0]
-viewPort = 0 30 1126 620 321 222
+viewPort = 0 30 1014 438 220 177
 [wave.1]
 viewPort = 127 219 960 332 100 65
 [wave.2]

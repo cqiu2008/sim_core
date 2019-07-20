@@ -2,11 +2,11 @@ Magic 271485
 Revision Verdi3_I-2014.03-SP2
 
 ; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
-viewPort 0 30 1061 488 220 177
+viewPort 0 30 919 410 296 177
 
 ; File list:
 ; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
-openDirFile -d / "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaFK/runsim/run_qst_vrd_nuvm_vvd1602_hls_FK/tb_dut_top.fsdb"
+openDirFile -d / "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaFKold/runsim/run_qst_vrd_nuvm_vvd1602_hls_FK/tb_dut_top.fsdb"
 
 ; file time scale:
 ; fileTimeScale ### s|ms|us|ns|ps
@@ -16,16 +16,16 @@ signalSpacing 5
 
 ; windowTimeUnit is used for zoom, cursor & marker
 ; waveform viewport range
-zoom 0.000000 16750850.000000
-cursor 715200.000000
-marker 560000.000000
+zoom 14832942.448980 16670050.000000
+cursor 16305000.000000
+marker 8465000.000000
 
 ; user define markers
 ; userMarker time_pos marker_name color linestyle
 ; visible top row signal index
-top 24
+top 0
 ; marker line index
-markerPos 37
+markerPos 14
 
 ; event list
 ; addEvent event_name event_expression
@@ -46,52 +46,23 @@ curSTATUS ByChange
 
 
 addGroup "G1"
-activeDirFile "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaFK/runsim/run_qst_vrd_nuvm_vvd1602_hls_FK/tb_dut_top.fsdb"
-addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/cnna_FIN_DDR_m_axi_U/ACLK
-addSignal -h 15 -holdScope ARESET
-addSignal -h 15 -holdScope ACLK_EN
-addSignal -h 15 -UNSIGNED -HEX -holdScope AWADDR[31:0]
-addSignal -h 15 -UNSIGNED -HEX -holdScope AWSIZE[2:0]
-addSignal -h 15 -holdScope AWVALID
-addSignal -h 15 -holdScope AWREADY
-addSignal -h 15 -holdScope WID[0:0]
-addSignal -h 15 -UNSIGNED -HEX -holdScope WSTRB[15:0]
-addSignal -h 15 -UNSIGNED -UDEC -holdScope AWLEN[7:0]
-addSignal -h 15 -holdScope WUSER[0:0]
-addSignal -h 15 -holdScope WVALID
-addSignal -h 15 -holdScope WREADY
-addSignal -h 15 -UNSIGNED -HEX -holdScope WDATA[127:0]
-addSignal -h 15 -holdScope WLAST
-addSignal -h 15 -holdScope BID[0:0]
-addSignal -h 15 -holdScope BUSER[0:0]
-addSignal -h 15 -holdScope BVALID
-addSignal -h 15 -holdScope BREADY
-addSignal -h 15 -UNSIGNED -HEX -holdScope BRESP[1:0]
-addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/cnna_FIN_DDR_m_axi_U/wreq_throttl/clk
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 /apatb_cnna_top/AESL_inst_cnna/cnna_FIN_DDR_m_axi_U/ARID[0:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARLEN[7:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARSIZE[2:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARBURST[1:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARLOCK[1:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARCACHE[3:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARPROT[2:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARQOS[3:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARREGION[3:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -holdScope ARUSER[0:0]
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -holdScope ARVALID
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -holdScope ARREADY
-addSignal -c ID_YELLOW6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope ARADDR[31:0]
-addSignal -h 15 -holdScope ACLK
-addSignal -h 15 /apatb_cnna_top/AESL_AXI_MASTER_FIN_DDR/FIFO_AR_req_full
-addSignal -h 15 -UNSIGNED -HEX /apatb_cnna_top/AESL_inst_cnna/cnna_FIN_DDR_m_axi_U/wreq_throttl/out_len[7:0]
-addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/cnna_FIN_DDR_m_axi_U/RID[0:0]
-addSignal -h 15 -holdScope RVALID
-addSignal -h 15 -holdScope RREADY
-addSignal -h 15 -UNSIGNED -HEX -holdScope RDATA[127:0]
-addSignal -h 15 -UNSIGNED -HEX -holdScope RRESP[1:0]
-addSignal -h 15 -holdScope RLAST
-addSignal -h 15 -holdScope RUSER[0:0]
 addGroup "G2"
+activeDirFile "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaFKold/runsim/run_qst_vrd_nuvm_vvd1602_hls_FK/tb_dut_top.fsdb"
+addSignal -h 15 -UNSIGNED -HEX /apatb_cnna_top/AESL_inst_cnna/u0_axictrl_ram/O_maxi_awlen[31:0]
+addSignal -h 15 -holdScope I_maxi_awready
+addSignal -h 15 -holdScope O_maxi_awvalid
+addSignal -h 15 -UNSIGNED -HEX -holdScope O_maxi_awaddr[31:0]
+addSignal -h 15 -holdScope I_maxi_wready
+addSignal -h 15 -holdScope O_maxi_wvalid
+addSignal -h 15 -UNSIGNED -HEX -holdScope O_maxi_wdata[127:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope O_maxi_wlast[1:0]
+addSignal -h 15 -holdScope I_maxi_bid[0:0]
+addSignal -h 15 -holdScope I_maxi_buser[0:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope I_maxi_bresp[1:0]
+addSignal -h 15 -holdScope I_maxi_bvalid
+addSignal -h 15 -holdScope O_maxi_bready
+addGroup "G3"
+addGroup "G4"
 
 ; getSignalForm Scope Hierarchy Status
 ; active file of getSignalForm

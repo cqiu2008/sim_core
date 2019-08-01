@@ -198,10 +198,12 @@ sim:
 	$(VLOG_LIST) ; \
 	$(VSIM) ; 
 
+#	   	-novopt \
+
 .PHONY:VSIM
 VSIM = 	vsim \
 	   	$(lib_mode) \
-	   	-novopt \
+	   	-vopt \
 		-sva \
 		-assertdebug \
         -c \

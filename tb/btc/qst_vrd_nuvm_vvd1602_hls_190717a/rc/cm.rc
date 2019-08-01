@@ -1,0 +1,102 @@
+Magic 271485
+Revision Verdi3_I-2014.03-SP2
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 30 975 358 350 84
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnna190717a/runsim/run_qst_vrd_nuvm_vvd1602_hls_190717a/tb_dut_top.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 3368018.927789 4720173.272396
+cursor 4125000.000000
+marker 3380000.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 36
+; marker line index
+markerPos 46
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G1"
+addGroup "G2"
+addGroup "G3"
+activeDirFile "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnna190717a/runsim/run_qst_vrd_nuvm_vvd1602_hls_190717a/tb_dut_top.fsdb"
+addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/u_main_process/u0_main_cnt_ctrl/I_clk
+addSignal -h 15 -UNSIGNED -HEX -holdScope O_hcnt[15:0]
+addSignal -h 15 -holdScope O_ldap_start
+addSignal -h 15 -holdScope I_ldap_done
+addSignal -h 15 -UNSIGNED -HEX /apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/I_hindex[15:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope O_ibuf0_addr[8:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope O_ibuf1_addr[8:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope I_ibuf0_rdata[127:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope I_ibuf1_rdata[127:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope I_ipara_height[15:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope I_hindex[15:0]
+addSignal -h 15 -holdScope I_hcnt_odd
+addSignal -h 15 -UNSIGNED -HEX -holdScope I_kernel_w[4:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope I_stride_w[4:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope I_pad_w[4:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope I_ipara_width[15:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope I_ipara_ci[12:0]
+addSignal -h 15 -holdScope S_split_en
+addSignal -h 15 -UNSIGNED -HEX -holdScope S_pepix_stride_w[4:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope S_pesub1pix_stride_w[4:0]
+addSignal -c ID_GREEN2 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope S_wpart[15:0]
+addSignal -c ID_GREEN2 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope S_wo_total[15:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope S_ci_group_1d[9:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope S_wo_group[15:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope S_wo_consume[15:0]
+addSignal -c ID_RED7 -ls solid -lw 1 -h 15 /apatb_cnna_top/AESL_inst_cnna/u_main_process/u0_main_cnt_ctrl/O_swap_start
+addSignal -c ID_RED7 -ls solid -lw 1 -h 15 -holdScope I_swap_done
+addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/I_clk
+addSignal -h 15 -holdScope S_sbuf0_en
+addSignal -h 15 -holdScope S_sbuf1_en
+addSignal -h 15 -holdScope S_swap_start
+addSignal -h 15 -UNSIGNED -HEX -holdScope S_cig_cnt[9:0]
+addSignal -h 15 -holdScope S_cig_valid
+addSignal -h 15 -holdScope S_cig_over_flag
+addSignal -h 15 -UNSIGNED -HEX -holdScope S_woc_cnt[15:0]
+addSignal -h 15 -holdScope S_woc_over_flag
+addSignal -h 15 -UNSIGNED -HEX -holdScope S_wog_cnt[15:0]
+addSignal -h 15 -holdScope S_wog_over_flag
+addSignal -h 15 -holdScope S_cig_valid
+addSignal -h 15 -holdScope S_woc_valid
+addSignal -h 15 -UNSIGNED -UDEC -holdScope S_wo_group[15:0]
+addSignal -h 15 -holdScope S_split_en
+addSignal -h 15 -UNSIGNED -HEX -holdScope S_wot_div_rdbpix[15:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope S_w[15:0]
+addSignal -h 15 -holdScope S_wog_valid
+addGroup "G4"
+addGroup "G5"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+

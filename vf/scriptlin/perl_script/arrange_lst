@@ -1,0 +1,64 @@
+#!/usr/bin/perl -w
+use 5.010;
+use File::Basename;
+use utf8;
+binmode(STDOUT,":encoding(gbk)");
+print "Beginning to process ... \n";
+print "CMD Format---arrange_lst Makefile.list begin bcm_params \n";
+print "CMD Format---arrange_lst Makefile.list begin cc_constants \n";
+print "CMD Format---arrange_lst Makefile.list end undef \n";
+
+#-----delete the first input character when it including the "/" or "." and so on.
+$_=$ARGV[0];
+##s/\/\s*$//g; ## delete the "/" when the character including the "/"
+s/\W+\s*$//g; ## delete the "/" when the character including the "/" or "." and so on
+my $filename = $_;
+my $outfilename=$filename."tmp";
+print "$filename \n"; 
+print "$outfilename \n"; 
+my $basename = basename($filename,".v");
+
+$_=$ARGV[1];
+s/\W+\s*$//g; ## delete the "/" when the character including the "/" or "." and so on
+my $type= $_;
+
+$_=$ARGV[2];
+s/\W+\s*$//g; ## delete the "/" when the character including the "/" or "." and so on
+my $keyword= $_;
+
+#----------------------------------------------------------
+die "file $filename is not exist! \n" unless -e $filename;
+#\u6253\u5f00\u6587\u4ef6
+open(VFILE,"<",$filename) || die "open file failed!\n";
+open(OFILE,">",$outfilename) || die "open file failed!\n";
+#----------------------------------------------------------
+my $first_flag = 1;
+while(<VFILE>){
+	chomp;#\u53bb\u9664\u884c\u5c3e\u7684\n
+#push @content,$_;
+    if($first_flag>0){
+	    $firsttext.=$_."\n";
+        $first_flag = 0;
+    }
+    elsif(/$keyword/i){
+	    $keytext.=$_."\n";
+    }else{
+	    $text.=$_."\n";
+    }
+}
+select OFILE;
+if($type =~ /\b(begin)\b/){
+	print $firsttext;
+    print $keytext;
+    print $text;
+}else{
+	print $firsttext;
+    print $text;
+    print $keytext;
+}
+close OFILE;
+select STDOUT;
+print "-"x10,"\n"."Spliting,output file to --> $outfilename\n";
+close VFILE;
+
+system "mv $outfilename $filename";

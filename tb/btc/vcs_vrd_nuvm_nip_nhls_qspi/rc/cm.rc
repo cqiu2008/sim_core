@@ -1,0 +1,65 @@
+Magic 271485
+Revision Verdi3_L-2016.06-1
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 28 680 334 295 71
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_qspi/runsim/run_vcs_vrd_nuvm_nip_nhls_qspi/tb_dut_top.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 415.383420 513.067140
+cursor 0.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 1
+; marker line index
+markerPos 11
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G1"
+activeDirFile "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_qspi/runsim/run_vcs_vrd_nuvm_nip_nhls_qspi/tb_dut_top.fsdb"
+addSignal -h 15 /tb_dut_top/U_qspi_mst_DW_apb_ssi_top/pclk
+addSignal -h 15 -holdScope presetn
+addSignal -h 15 -holdScope psel
+addSignal -h 15 -holdScope penable
+addSignal -h 15 -holdScope pwrite
+addSignal -h 15 -UNSIGNED -HEX -holdScope paddr[28:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope pwdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope prdata[31:0]
+addSignal -h 15 -holdScope pready
+addSignal -h 15 -holdScope pslverr
+addSignal -h 15 -UNSIGNED -HEX -holdScope pstrb[3:0]
+addGroup "G2"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+

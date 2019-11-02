@@ -2,7 +2,7 @@ Magic 271485
 Revision Verdi3_I-2014.03-SP2
 
 ; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
-viewPort 0 30 1123 619 302 462
+viewPort 0 30 913 488 295 222
 
 ; File list:
 ; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
@@ -15,23 +15,19 @@ openDirFile -d / "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnna190730a/runsim/run
 signalSpacing 5
 
 ; windowTimeUnit is used for zoom, cursor & marker
-windowTimeUnit 1ns
-
 ; waveform viewport range
-zoom 4673.603435 4765.573623 1n
-cursor 4695.000000
-marker 4435.000000
+zoom 11511651.036342 11564746.499732
+cursor 11515000.000000
+marker 11845000.000000
 
 ; user define markers
 ; userMarker time_pos marker_name color linestyle
-userMarker 4645 sc_idBegin ID_RED6 long_dashed
-userMarker 4765 errr ID_RED6 long_dashed
-userMarker 4435 cig_vald ID_GREEN5 long_dashed
+userMarker 9725000 craddr-d3 ID_GREEN5 long_dashed
 
 ; visible top row signal index
-top 5
+top 0
 ; marker line index
-markerPos 22
+markerPos 8
 
 ; event list
 ; addEvent event_name event_expression
@@ -52,34 +48,32 @@ curSTATUS ByChange
 
 
 addGroup "G1"
-activeDirFile "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnna190730a/runsim/run_qst_vrd_nuvm_vvd1602_hls_190730a/tb_dut_top.fsdb"
-addSignal -h 15 -UNSIGNED -HEX /apatb_cnna_top/AESL_inst_cnna/u_main_process/S_hcnt[15:0]
-addSignal -h 15 -UNSIGNED -HEX /apatb_cnna_top/AESL_inst_cnna/u_main_process/u0_load_image/S_addr0a[8:0]
-addSignal -h 15 -UNSIGNED -HEX -holdScope S_wdata0a[127:0]
-addSignal -h 15 -holdScope S_wr0a
 addGroup "G2"
-addSignal -c ID_RED5 -ls solid -lw 3 -h 20 -UNSIGNED -HEX /apatb_cnna_top/AESL_inst_cnna/u_main_process/S_hcnt[15:0]
-addSignal -h 20 -holdScope S_tcap_start
-addSignal -h 20 -holdScope S_tcap_done
-addSignal -c ID_YELLOW8 -ls solid -lw 1 -h 20 -holdScope S_ldap_start
-addSignal -c ID_YELLOW8 -ls solid -lw 1 -h 20 -holdScope S_ldap_done
-addSignal -h 20 -holdScope S_swap_start
-addSignal -h 20 -holdScope S_swap_done
-addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/u_main_process/u_transform_hcnt_wrapper/I_clk
-addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/SC_cig_valid
-addSignal -h 15 -UNSIGNED -HEX -holdScope SC_wog_cnt[15:0]
-addSignal -h 15 -UNSIGNED -HEX -holdScope SC_w[15:0]
-addSignal -h 15 -holdScope SC_wws[0:1]
-addSignal -expanded -h 15 -holdScope SC_id[0:1]
-addSignal -h 15 -UNSIGNED -HEX -holdScope SC_id[0][15:0]
-addSignal -h 15 -UNSIGNED -HEX -holdScope SC_id[1][15:0]
-addSignal -h 15 -holdScope SC_idforpix[0:1]
-addSignal -h 15 -holdScope SC_k[0:1]
+activeDirFile "" "/media/cqiu/e/work/prj/AIPrj/sim/sim_cnna190730a/runsim/run_qst_vrd_nuvm_vvd1602_hls_190730a/tb_dut_top.fsdb"
+addSignal -h 15 /apatb_cnna_top/AESL_inst_cnna/u_main_process/u_main_post/I_clk
+addSignal -h 15 -holdScope I_ap_start
+addSignal -h 15 -holdScope O_ap_done
+addSignal -h 15 -UNSIGNED -HEX -holdScope O_oraddr[8:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope I_ordata0[2047:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_pix_cnt[2:0]
+addSignal -expanded -h 15 -holdScope SC_ipbuf[0:31]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[0][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[1][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[2][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[3][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[4][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[5][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[6][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[7][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[8][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[9][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[10][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[11][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[12][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[13][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[14][23:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope SC_ipbuf[15][23:0]
 addGroup "G3"
-addGroup "G4"
-addGroup "G5"
-addGroup "G6"
-addGroup "G7"
 
 ; getSignalForm Scope Hierarchy Status
 ; active file of getSignalForm
@@ -91,25 +85,16 @@ getSignalForm close
 "/apatb_cnna_top"
 "/apatb_cnna_top/AESL_inst_cnna"
 "/apatb_cnna_top/AESL_inst_cnna/u_main_process"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/ws_idc_cm"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/ws_p_idx"
+"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_process_element"
 
 SCOPE_LIST_BEGIN
 "/apatb_cnna_top"
+"/test_msw"
+"/cnna_axilite_s_axi_ram"
 "/apatb_cnna_top/AESL_inst_cnna"
+"/apatb_cnna_top/calculate_performance"
 "/apatb_cnna_top/AESL_inst_cnna/u_main_process"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_transform_hcnt_wrapper"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_transform_hcnt_wrapper/hcntInst[0]"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_transform_hcnt_wrapper/hcntInst[0]/u_transform_hcnt"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_transform_hcnt_wrapper/hcntInst[0]/u_transform_hcnt/u_hcnt_div_rempart"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/u_wo_total"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/ws_p_idx"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/ws_idc_cm"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/U0_loop3_wog_cnt"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_multi_slide_windows_flatten/ws_idc_cm/genblk1[0]"
-"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u0_main_cnt_ctrl"
+"/apatb_cnna_top/AESL_inst_cnna/u_main_process/u_process_element"
 SCOPE_LIST_END
 
 GETSIGNALFORM_SCOPE_HIERARCHY_END

@@ -1,5 +1,5 @@
 #*****************************************************************************
-# This is the makeflie to control the whole verification environment
+# This is the makefile to control the whole verification environment
 #
 # Author: Qiu Chao 
 # Date  : 2018/11/20
@@ -21,6 +21,7 @@ export BTC_ROOT
 export UTC_ROOT 
 export SCRIPTLIN_ROOT
 export MAKEFILE_SCRIPT 
+export PERL_SCRIPT 
 export VVD_SCRIPT
 export FLIST_SCRIPT 
 export RUNSIM_ROOT 
@@ -34,6 +35,7 @@ export PAR_OTHER_TYPE
 export PAR_SUB_MAKEFILE
 export MACRO_RTL_FILE
 export UVM_HOME
+export VCS_HOME
 export NOVAS_HOME
 export NOVAS_RC
 export NOVAS_ROOT
@@ -66,20 +68,28 @@ UTC_ROOT		= $(TB_ROOT)/utc
 SCRIPTLIN_ROOT  = $(VF_ROOT)/scriptlin
 LIBPLI_ROOT		= $(VF_ROOT)/libpli
 MAKEFILE_SCRIPT = $(SCRIPTLIN_ROOT)/makefile_script
+PERL_SCRIPT     = $(SCRIPTLIN_ROOT)/perl_script
 VVD_SCRIPT		= $(SCRIPTLIN_ROOT)/vivado_script
 FLIST_SCRIPT	= $(SCRIPTLIN_ROOT)/flist_script
 RUNSIM_ROOT		= $(shell cd ./;pwd)
 MACRO_RTL_FILE  = $(RTL_ROOT)/macro_rtl
 UVM_HOME		= /opt/tool/mentor/questasim10_4c/questasim/verilog_src/uvm-1.1d
-NOVAS_HOME 		= /opt/tool/novas/verdi3_201403
+VCS_HOME        = /opt/tool/synopsys/vcs_mx_vl201606
+#NOVAS_HOME 		= /opt/tool/novas/verdi3_201403
+NOVAS_HOME 		= /opt/tool/synopsys/verdi_vL_2016_06_1
 NOVAS_ROOT		= $(VF_ROOT)/novas
 NOVAS_RC		= $(NOVAR_ROOT)/novas.rc
-PLATFORM   		= LINUXAMD64
-LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/MODELSIM/$(PLATFORM)
-SIM_LIBRARY_PATH = /home/logic/verification/library
-VVD1602_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2016_02
-VVD1703_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2017_03
-VVD1803_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2018_03
+
+# PLATFORM   		= LINUXAMD64
+# LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/MODELSIM/$(PLATFORM)
+
+PLATFORM   		= LINUX64
+LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)
+
+# SIM_LIBRARY_PATH = /home/logic/verification/library
+# VVD1602_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2016_02
+# VVD1703_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2017_03
+# VVD1803_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2018_03
 IP_PRJ			= ip_prj
 MAKEFILE_CMPL	= Makefile.cmpl.vvd
 WEB_ROOT		= $(VF_ROOT)/gui/tornadoWeb
@@ -191,6 +201,7 @@ buildsim:
 		touch $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
 	fi ; \
 	if [[ ! -d $(RUNSIM_ROOT)/run_$(PAR_TC)/$(PAR_TC) ]]; then \
+        ln -s $(MAKEFILE_SCRIPT)/$(PAR_SUB_MAKEFILE) $(RUNSIM_ROOT)/run_$(PAR_TC)/$(PAR_SUB_MAKEFILE) ; \
 		if [[ $(PAR_UVM_TYPE) == uvm ]] ; then \
 			ln -s $(UTC_ROOT)/$(PAR_TC) $(RUNSIM_ROOT)/run_$(PAR_TC)/$(PAR_TC)  ; \
 		else \

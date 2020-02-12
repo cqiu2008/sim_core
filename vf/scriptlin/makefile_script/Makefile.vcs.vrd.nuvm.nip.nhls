@@ -55,32 +55,38 @@ arrange_flist:
 .PHONY:sim
 sim:
 	vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed \
+		-sverilog \
+		-assert enable_diag \
+		-debug_access+all \
+		+define+ASSERT_ON+CONVER_ON \
     +incdir+$(TB_ROOT) \
     +incdir+$(BTC_ROOT)/$(PAR_TC) \
+		+define+ASSERT_ON+CONVER_ON \
+    +incdir+$(VCS_HOME)/packages/sva \
     $(VLOG_LIST) \
     -debug_all \
-	-P /opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/novas.tab \
+		-P /opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/novas.tab \
     /opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/pli.a \
-	| tee vcs.log ; \
+		| tee vcs.log ; \
     $(RUNSIM_ROOT)/run_$(PAR_TC)/simv -l run.log -assert filter+success -assert maxsuccess=3 ;
 
 
 
 
-.PHONY:sim1
-sim1:
-	vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed \
-    +vc -sverilog  \
-	-debug_access+all \
-    +define+ASSERT_ON+CONVER_ON \
-    -y $(VCS_HOME)/packages/sva/ \
-    +libext+.sv \
-    +incdir+$(VCS_HOME)/packages/sva \
-    +incdir+$(TB_ROOT) \
-    +incdir+$(BTC_ROOT)/$(PAR_TC) \
-    $(VLOG_LIST) \
-    -l comp.lo ; \
-    $(RUN_VER) ;
+# .PHONY:sim1
+# sim1:
+# 	vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed \
+#     +vc -sverilog  \
+# 		-debug_access+all \
+#     +define+ASSERT_ON+CONVER_ON \
+#     -y $(VCS_HOME)/packages/sva/ \
+#     +libext+.sv \
+#     +incdir+$(VCS_HOME)/packages/sva \
+#     +incdir+$(TB_ROOT) \
+#     +incdir+$(BTC_ROOT)/$(PAR_TC) \
+#     $(VLOG_LIST) \
+#     -l comp.lo ; \
+#     $(RUN_VER) ;
 
 #	/opt/tool/synopsys/vcs_mx_vl201606/linux64/bin/vcs +vc -sverilog  \
 

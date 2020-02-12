@@ -298,11 +298,14 @@ Selection-LineWidth = 1
 [FSM_Dlg-Print]
 Orientation = Landscape
 [FileBrowser]
-nWaveRestoreRCDirHistory = /media/cqiu/e/work/prj/AIPrj/sim/sim_fifo/runsim/run_qst_vrd_nuvm_vvd1602_nhls_wfast_rlow_fifo,
-nWaveOpenFsdbDirHistory = /media/cqiu/e/work/prj/AIPrj/sim/sim_fifo/runsim/run_vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo,
+nWaveOpenFsdbDirHistory = "\"/media/cqiu/e/work/prj/AIPrj/sim/sim_fifo/runsim/run_vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo\"" "\"/home/cqiu/work/prj/sim_prj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/rc\""
+nWaveRestoreRCDirHistory = "\"/media/cqiu/e/work/prj/AIPrj/sim/sim_fifo/runsim/run_qst_vrd_nuvm_vvd1602_nhls_wfast_rlow_fifo\"" "\"/home/cqiu/work/prj/sim_prj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/rc/cm.rc\"" "\"/home/cqiu/work/prj/sim_prj/sim_fifo/runsim/run_vcs_vrd\
+_nuvm_nip_nhls_wfast_rlow_fifo\""
 [Form]
 version = Verdi3_L-2016.06-1
 wave/saveSig.fm = 100,44,723,524
+wave/openWFile.fm = 100,18,823,694
+wave/restoreSig.fm = 100,44,723,524
 [General]
 autoSaveSession = FALSE
 TclAutoSource = 
@@ -312,8 +315,8 @@ DblClick = 250
 Find_Delimiter = .
 ViewMouse13Swap = FALSE
 cmd_enter_form = FALSE
-version = Verdi3_L-2016.06-1
 bDisplayWelcome = FALSE
+version = Verdi3_L-2016.06-1
 SignalCaseInSensitive = FALSE
 ShowWndCtntDuringResizing = FALSE
 [GlobalProp]
@@ -445,9 +448,10 @@ savePropDtl = TRUE
 [QtDialog]
 importDesignForm = 509,132,634,611
 QwInfoMsgDlg = 337,267,750,250
-QwWarnMsgDlg = 55,14,1301,533
 aboutVerdiDialog = 319,73,773,623
-QwUserAskDlg = 820,524,324,130
+QwWarnMsgDlg = 65,136,1301,533
+qWaveSignalDialog = 277,104,856,563
+QwUserAskDlg = 820,608,324,130
 [Relationship]
 hideRecursiceNode = FALSE
 [Session Cache]
@@ -455,7 +459,7 @@ hideRecursiceNode = FALSE
 3 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnna190717a-org/runsim/run_qst_vrd_nuvm_vvd1602_hls_190717a/verdiLog/novas_autosave.ses
 4 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaFK/runsim/run_qst_vrd_nuvm_vvd1602_hls_FK/verdiLog/novas_autosave.ses
 5 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaRAM/runsim/run_qst_vrd_nuvm_vvd1602_hls_190530bb/verdiLog/novas_autosave.ses
-1 = /media/cqiu/e/work/prj/AIPrj/sim/sim_fifo/runsim/run_vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/verdiLog/novas_autosave.ses
+1 = /home/cqiu/work/prj/sim_prj/sim_fifo/runsim/run_vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/verdiLog/novas_autosave.ses
 [Signal List]
 sigListBackgroundColor = ID_GRAY6
 sigListForegroundColor = ID_BLACK
@@ -637,7 +641,7 @@ pdmlCommand = ID_BLACK
 pdmlMacro = ID_BLACK
 font = FIXED14
 [Text.1]
-viewport = 65 24 1301 744 45
+viewport = 55 -14 1301 744 45
 [TextPrinter]
 Orientation = Landscape
 Indicator = FALSE
@@ -736,8 +740,8 @@ waveform_vertical_scroll_bar = TRUE
 scope_to_save_with_macro
 open_file_dir
 open_rc_file_dir
-getSignalForm = 100 100 856 563 372 442 228 120
-viewPort = 0 28 1013 442 295 71
+getSignalForm = 277 48 856 563 228 465 574 225
+viewPort = 0 28 1012 334 295 71
 signalSpacing = 5
 digitalSignalHeight = 15
 analogSignalHeight = 98
@@ -957,7 +961,7 @@ maskIsolation = FALSE
 maskRetention = FALSE
 maskDrivingPowerOff = FALSE
 maskToggle = FALSE
-autoBackupSignals = off 5 "\"/media/cqiu/e/work/prj/AIPrj/sim/sim_fifo/runsim/run_vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/verdiLog\"" "\"533\""
+autoBackupSignals = off 5 "\"/home/cqiu/work/prj/sim_prj/sim_fifo/runsim/run_vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/verdiLog\"" "\"533\""
 signal_rc_attribute = 65535
 signal_rc_alias_attribute = 0
 ConvertAttr1 = -inc FALSE
@@ -985,7 +989,9 @@ curveWindow_Drag&Drop_Mode = TRUE
 hspiceIncOpenMode = TRUE
 pcSelectMode = TRUE
 hierarchyDelimiter = /
-RecentFile1 = "\"/media/cqiu/e/work/prj/AIPrj/sim/sim_fifo/runsim/run_vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/tb_dut_top.fsdb\""
+RecentFile1 = "\"/home/cqiu/work/prj/sim_prj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/rc/cm.rc\""
+RecentFile2 = "\"/home/cqiu/work/prj/sim_prj/sim_fifo/runsim/run_vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/tb_dut_top.fsdb\""
+RecentFile3 = "\"/media/cqiu/e/work/prj/AIPrj/sim/sim_fifo/runsim/run_vcs_vrd_nuvm_nip_nhls_wfast_rlow_fifo/tb_dut_top.fsdb\""
 open_file_time_range = FALSE
 value_window_aligment = Right
 signal_window_alignment = Auto
@@ -1445,7 +1451,7 @@ AddImportArgument = FALSE
 LineBreakWithScope = TRUE
 StopAfterCompileOption = -s
 [wave.0]
-viewPort = 0 28 1013 442 295 71
+viewPort = 0 28 1012 334 295 71
 [wave.1]
 viewPort = 127 219 960 332 100 65
 [wave.2]

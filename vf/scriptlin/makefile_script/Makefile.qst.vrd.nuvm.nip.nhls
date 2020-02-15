@@ -8,6 +8,14 @@
 
 -include Makefile.flist
 
+export UVM_HOME
+export PLATFORM
+export LD_LIBRARY_PATH
+
+UVM_HOME = /opt/tool/mentor/questasim10_4c/questasim/verilog_src/uvm-1.1d
+PLATFORM = LINUXAMD64
+LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/MODELSIM/$(PLATFORM)
+
 USE_COV=1
 ifeq ($(USE_COV),1)
     COV_OPT = -cover bces -incr
@@ -57,6 +65,7 @@ sim:
 	vmap work work ; \
 	vlog $(MACRO_OPT) \
 	+incdir+$(RTL_ROOT) \
+	+incdir+$(TB_ROOT) \
 	-writetoplevels questa.tops \
     $(COV_OPT) \
 	$(VLOG_LIST) ; \

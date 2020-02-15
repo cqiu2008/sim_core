@@ -8,8 +8,13 @@
 
 -include Makefile.flist
 
-#PLATFORM   		= LINUX64
-#LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/lib/$(PLATFORM)
+export PLATFORM
+export UVM_HOME
+export LD_LIBRARY_PATH
+
+UVM_HOME = /opt/tool/mentor/questasim10_4c/questasim/verilog_src/uvm-1.1d
+PLATFORM = LINUXAMD64
+LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)
 
 #PLATFORM   		= LINUXAMD64
 #LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)

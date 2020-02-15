@@ -34,13 +34,13 @@ export PAR_IP_TYPE
 export PAR_OTHER_TYPE
 export PAR_SUB_MAKEFILE
 export MACRO_RTL_FILE
-export UVM_HOME
+#export UVM_HOME
 export VCS_HOME
 export NOVAS_HOME
 export NOVAS_RC
 export NOVAS_ROOT
-export PLATFORM
-export LD_LIBRARY_PATH
+#export PLATFORM
+#export LD_LIBRARY_PATH
 export SIM_LIBRARY_PATH
 export VVD1602_LIBRARY_PATH
 export VVD1703_LIBRARY_PATH
@@ -73,20 +73,21 @@ VVD_SCRIPT		= $(SCRIPTLIN_ROOT)/vivado_script
 FLIST_SCRIPT	= $(SCRIPTLIN_ROOT)/flist_script
 RUNSIM_ROOT		= $(shell cd ./;pwd)
 MACRO_RTL_FILE  = $(RTL_ROOT)/macro_rtl
-UVM_HOME		= /opt/tool/mentor/questasim10_4c/questasim/verilog_src/uvm-1.1d
+#UVM_HOME		= /opt/tool/mentor/questasim10_4c/questasim/verilog_src/uvm-1.1d
 VCS_HOME        = /opt/tool/synopsys/vcs_mx_vl201606
 #NOVAS_HOME 		= /opt/tool/novas/verdi3_201403
 NOVAS_HOME 		= /opt/tool/synopsys/verdi_vL_2016_06_1
 NOVAS_ROOT		= $(VF_ROOT)/novas
 NOVAS_RC		= $(NOVAR_ROOT)/novas.rc
 
+
 # PLATFORM   		= LINUXAMD64
 # LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/MODELSIM/$(PLATFORM)
 
-PLATFORM   		= LINUX64
-LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)
+#PLATFORM   		= LINUX64
+#LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)
 
-# SIM_LIBRARY_PATH = /home/logic/verification/library
+SIM_LIBRARY_PATH = /home/logic/verification/library
 # VVD1602_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2016_02
 # VVD1703_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2017_03
 # VVD1803_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2018_03

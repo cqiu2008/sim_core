@@ -1,0 +1,81 @@
+Magic 271485
+Revision Verdi3_I-2014.03-SP2
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 30 1406 652 215 67
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/media/cqiu/Document/work/prj/AIPrj/sim/sim_fifo/runsim/run_qst_vrd_nuvm_vvd1602_nhls_wlow_rfast_fifo/tb_dut_top.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 0.000000 26249.900000
+cursor 10350.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 0
+; marker line index
+markerPos 10
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G4"
+activeDirFile "" "/media/cqiu/Document/work/prj/AIPrj/sim/sim_fifo/runsim/run_qst_vrd_nuvm_vvd1602_nhls_wlow_rfast_fifo/tb_dut_top.fsdb"
+addSignal -c ID_ORANGE6 -ls solid -lw 1 -h 15 /tb_dut_top/u0_asyn_fifo/I_wrst
+addSignal -c ID_ORANGE6 -ls solid -lw 1 -h 15 -holdScope I_wclk
+addSignal -c ID_ORANGE6 -ls solid -lw 1 -h 15 -holdScope I_winc
+addSignal -c ID_ORANGE6 -ls solid -lw 1 -h 15 -UNSIGNED -HEX -holdScope I_wdata[7:0]
+addSignal -c ID_ORANGE6 -ls solid -lw 1 -h 15 -holdScope O_wfull
+addSignal -h 15 -holdScope I_rrst
+addSignal -h 15 -holdScope I_rclk
+addSignal -h 15 -holdScope I_rinc
+addSignal -h 15 -UNSIGNED -HEX -holdScope O_rdata[7:0]
+addSignal -h 15 /tb_dut_top/u0_sva_check_rempty/assert_chk_result
+addSignal -h 15 /tb_dut_top/u0_asyn_fifo/O_rempty
+addGroup "G5"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+activeDirFile "" "/media/cqiu/Document/work/prj/AIPrj/sim/sim_fifo/runsim/run_qst_vrd_nuvm_vvd1602_nhls_wlow_rfast_fifo/tb_dut_top.fsdb"
+
+GETSIGNALFORM_SCOPE_HIERARCHY_BEGIN
+getSignalForm close
+
+"/tb_dut_top"
+
+SCOPE_LIST_BEGIN
+"/tb_dut_top"
+"/tb_dut_top/U_sva_check_eth_result"
+"/tb_dut_top/u0_sva_check_rdata"
+"/tb_dut_top/u0_sva_check_rempty"
+SCOPE_LIST_END
+
+GETSIGNALFORM_SCOPE_HIERARCHY_END
+
+

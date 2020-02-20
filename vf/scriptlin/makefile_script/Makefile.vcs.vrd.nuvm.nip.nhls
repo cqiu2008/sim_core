@@ -63,19 +63,19 @@ sim:
 		-sverilog \
 		-assert enable_diag \
 		-debug_access+all \
+		-timescale=1ns/1ps \
 		+define+ASSERT_ON+CONVER_ON \
     +incdir+$(TB_ROOT) \
     +incdir+$(BTC_ROOT)/$(PAR_TC) \
 		+define+ASSERT_ON+CONVER_ON \
     +incdir+$(VCS_HOME)/packages/sva \
     $(VLOG_LIST) \
-    -debug_all \
-		-P /opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/novas.tab \
-    /opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/pli.a \
 		| tee vcs.log ; \
     $(RUNSIM_ROOT)/run_$(PAR_TC)/simv -l run.log -assert filter+success -assert maxsuccess=3 ;
 
 
+		#-P /opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/novas.tab \
+    #/opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/pli.a \
 
 
 # .PHONY:sim1

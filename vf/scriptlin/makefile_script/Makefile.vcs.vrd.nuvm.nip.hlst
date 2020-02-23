@@ -1,0 +1,124 @@
+#*****************************************************************************
+# This is the makeflie to control the whole verification environment
+#
+# Author: Qiu Chao 
+# Date  : 2018/11/20
+#
+#*****************************************************************************
+
+-include Makefile.flist
+
+export PLATFORM
+export UVM_HOME
+export LD_LIBRARY_PATH
+
+UVM_HOME = /opt/tool/mentor/questasim10_4c/questasim/verilog_src/uvm-1.1d
+PLATFORM = LINUXAMD64
+LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)
+
+#PLATFORM   		= LINUXAMD64
+#LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)
+#SIM_LIBRARY_PATH = /home/logic/verification/library
+#VVD1602_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2016_02
+#VVD1703_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2017_03
+#VVD1803_LIBRARY_PATH = $(SIM_LIBRARY_PATH)/vivado2018_03
+
+.PHONY:preparation
+preparation: 
+	cp -rf $(RUNSIM_ROOT)/Makefile.flist $(RUNSIM_ROOT)/run_$(PAR_TC) ; \
+	cp -rf $(RUNSIM_ROOT)/verdi.flist    $(RUNSIM_ROOT)/run_$(PAR_TC) ; 
+
+####Generate the Makfile.flist
+.PHONY:vloglist
+vloglist:
+	####Write the "VLOG_LIST := \" to the Makefile.flist
+	echo "VLOG_LIST := \\" 					> $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Get the flist to Makefile.flist,(such as xxx.v xxxx.sv,and so on)
+	find $(RTL_ROOT) 			-name \*.vh >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Add \ in the end of line.(such as xxx.v conver to  xxx.v \ and so on)
+	####Attention:$ has other means in the makefile,so we use $$ instead of $.
+	####"\.v \\\" means ".v \"
+	sed -i "s/\.vh$$/\.vh \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.v$$/\.v \\\/g"   $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i "s/\.sv$$/\.sv \\\/g" $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	####Filter the (_bb.v,_inst.v ...)in the ipcore folder 
+	#### ".*" can math every char every length
+	sed -i '/ipcoresyn/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_bb/d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_inst\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
+	sed -i '/ipcoresim.*_xilinx\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; 
+
+####arrange the Makfile.flist, take some .v to the first or the end position
+.PHONY:arrange_flist
+arrange_flist:
+	$(PERL_SCRIPT)/arrange_lst $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist begin bcm_params ; \
+    $(PERL_SCRIPT)/arrange_lst $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist begin cc_constants ; \
+    $(PERL_SCRIPT)/arrange_lst $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist end undef  
+
+.PHONY:sim
+sim:
+	vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed \
+		-sverilog \
+		-assert enable_diag \
+		-debug_access+all \
+		-timescale=1ns/1ps \
+		+define+ASSERT_ON+CONVER_ON \
+    +incdir+$(TB_ROOT) \
+    +incdir+$(BTC_ROOT)/$(PAR_TC) \
+		+define+ASSERT_ON+CONVER_ON \
+    +incdir+$(VCS_HOME)/packages/sva \
+    $(VLOG_LIST) \
+		| tee vcs.log ; \
+    $(RUNSIM_ROOT)/run_$(PAR_TC)/simv -l run.log -assert filter+success -assert maxsuccess=3 ;
+
+
+		#-P /opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/novas.tab \
+    #/opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/pli.a \
+
+
+# .PHONY:sim1
+# sim1:
+# 	vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed \
+#     +vc -sverilog  \
+# 		-debug_access+all \
+#     +define+ASSERT_ON+CONVER_ON \
+#     -y $(VCS_HOME)/packages/sva/ \
+#     +libext+.sv \
+#     +incdir+$(VCS_HOME)/packages/sva \
+#     +incdir+$(TB_ROOT) \
+#     +incdir+$(BTC_ROOT)/$(PAR_TC) \
+#     $(VLOG_LIST) \
+#     -l comp.lo ; \
+#     $(RUN_VER) ;
+
+#	/opt/tool/synopsys/vcs_mx_vl201606/linux64/bin/vcs +vc -sverilog  \
+
+.PHONY:RUN_VER
+
+RUN_VER = $(RUNSIM_ROOT)/run_$(PAR_TC)/simv -ucli -i $(BTC_ROOT)/$(PAR_TC)/run.ucli +NUM+5 -l run_verlog
+
+#RUN_VER = $(RUNSIM_ROOT)/run_$(PAR_TC)/simv run -ucli -i $(BTC_ROOT)/$(PAR_TC)/run.ucli +NUM+5 -l run_verlog
+
+#RUN_VER = $(RUNSIM_ROOT)/run_$(PAR_TC)/simv -l run.log -assert filter+success -assert maxsuccess=3  
+
+.PHONY:verdi1
+verdi1:
+	cd $(RUNSIM_ROOT)/run_$(PAR_TC)	; \
+	find $(RTL_ROOT) 			-name \*.v 	> $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(RTL_ROOT) 			-name \*.sv	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.v 	>>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	find $(BTC_ROOT)/$(PAR_TC) 	-name \*.sv >>$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresyn/d' 					$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_bb/d' 				$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_inst\./d' 			$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+	sed -i '/ipcoresim.*_xilinx\./d' 		$(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f ; \
+    verdi -rcFile $(VF_ROOT)/novas/novas.rc -f $(RUNSIM_ROOT)/run_$(PAR_TC)/flist.f -ssf  $(RUNSIM_ROOT)/run_$(PAR_TC)/tb_dut_top.fsdb &
+
+.PHONY:verdi
+verdi:
+	cd $(RUNSIM_ROOT)/run_$(PAR_TC)	; \
+    verdi -rcFile $(VF_ROOT)/novas/novas.rc -f $(RUNSIM_ROOT)/run_$(PAR_TC)/verdi.flist -ssf  $(RUNSIM_ROOT)/run_$(PAR_TC)/tb_dut_top.fsdb &

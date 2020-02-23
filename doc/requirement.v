@@ -9,20 +9,26 @@
 //// 		windows or linux, Folder split : runsimlin, runsimwin
 //// 		discreption: windows do not have makefile 
 //// 		So no platform
-//// 	Node1: Simulator Type(2 Type,omit vcs)
-//// 		questasim , vivadosim , vcs and so on 
+//// 	Node1: Simulator Type(3 Type,omit vcs)
+//// 		questasim(qst) , vivadosim(vvd) , vcs(vcs) and so on 
 //// 	Node2: Wave Type(2 Type)
-//// 		without Verdi, with Verdi
+//// 		without Verdi(nvrd), with Verdi(vrd)
 //// 	Node3: UVM Type (2 Type)
-//// 		with UVM , without UVM
+//// 		with UVM(uvm) , without UVM(nuvm)
 //// 	Node4: IP Type (4 Type, but have subType)
-//// 		without IP, 
+//// 		without IP(nip), 
 //// 		with Xilinx IP, (vvd2016.2,vvd2014.2 and so on)
 //// 		with Altera IP, 
 //// 		with Lattice IP 
-//// 	Node5: Other Type (2 Type) 
-//// 		without HLS Type, with HLS Type
-////		(If with HLS type,Must be without UVM,with xilinx ip)
+//// 	Node5: Other Type (3 Type) 
+//// 		without HLS Type(nhls), with HLS Type(hls), with Hand List Type(hlst)
+////    Note:
+////		(If with    HLS type(hls),Must be without UVM,with xilinx ip,and with autolist)
+////		(If without HLS type(hls),Must be with auto list, 
+////                              autolist means,tools will generate the tb list and dut list for you)
+////    (If with    Hand List type(hlst),Must be without auto list
+////                              You should write the Makefile.flist  by your hand.
+
 ////////////////Just For Simulation Node Description End //////////////
 
 ////////////////Just For Simulation Name Rule Description Begin//////////////
@@ -40,6 +46,8 @@
 ////	nuvm		==== no uvm 
 ////	nip			==== no ip
 ////	nhls		==== no hls 
+////	(3)Prefix is "H" and then word abbreviation
+////  hlst    ==== hand list 
 ////////////////Just For Simulation Name Rule Description End   //////////////
 
 ////////////////Just For Simulation Makefile Type Description Begin//////////////
@@ -60,14 +68,16 @@
 ////	Makefile.qst.vrd.nuvm.xip.nhls	==== 	questa,Verdi,NoUVM,xilinxIp,NoHLS
 ////	Makefile.qst.vrd.nuvm.xip.hls 	====	questa,Verdi,NoUVM,xilinxip,HLS
 ////	////////
-////	Makefile.qst.vrd.uvm.nip.nhls	====	questa,Verdi,UVM,NoIp,NoHLS
-////	Makefile.qst.vrd.uvm.lip.nhls	==== 	questa,Verdi,UVM,latticeIp,NoHLS
-////	Makefile.qst.vrd.uvm.aip.nhls	==== 	questa,Verdi,UVM,alteraIp,NoHLS
-////	Makefile.qst.vrd.uvm.xip.nhls	==== 	questa,Verdi,UVM,xilinxIp,NoHLS
+////	Makefile.qst.vrd.uvm.nip.nhls	  ====	questa,Verdi,UVM,NoIp,NoHLS
+////	Makefile.qst.vrd.uvm.lip.nhls	  ==== 	questa,Verdi,UVM,latticeIp,NoHLS
+////	Makefile.qst.vrd.uvm.aip.nhls	  ==== 	questa,Verdi,UVM,alteraIp,NoHLS
+////	Makefile.qst.vrd.uvm.xip.nhls	  ==== 	questa,Verdi,UVM,xilinxIp,NoHLS
 ////	////////
 ////	Makefile.vvd.nvrd.nuvm.nip.nhls	====	vivado,NoVerdi,NoUVM,NoIp,NoHLS
 ////	Makefile.vvd.nvrd.nuvm.xip.nhls	==== 	vivado,NoVerdi,NoUVM,xilinxIp,NoHLS
 ////	Makefile.vvd.nvrd.nuvm.xip.hls 	====	vivado,NoVerdi,NoUVM,xilinxIp,HLS
+////	////////
+////	Makefile.vcs.vrd.nuvm.nip.hlst  ====	vcs   ,  Verdi,NoUVM,NIp,Hand List
 ////////////////Just For Simulation Makefile Type Description End  //////////////
 
 ////////

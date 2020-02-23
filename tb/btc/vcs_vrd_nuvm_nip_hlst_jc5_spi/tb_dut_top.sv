@@ -52,8 +52,8 @@ reg           WP_N                                            ;
 reg				    SO                                              ;
 reg [7:0]			rd_dq                                           ;
 reg [7:0]			rd_data                                         ;
-wire          si_so0 = SI                                     ;
-wire          so_so1 = SO                                     ;
+wire          si_so0                                          ; 
+wire          so_so1                                          ; 
 wire          wpn_so2 = WP_N                                  ;
 wire          hold_so3 = HOLD_N                               ;
 reg           address_in = 0                                  ;
@@ -163,7 +163,14 @@ assign inout_data[1]      = io_data_oe_n[1] ? 1'bz : io_data[1] ;
 assign inout_data[0]      = io_data_oe_n[0] ? 1'bz : io_data[0] ;
 assign io_data_masked_pin = inout_data                          ;
 
+pullup (inout_data[3]);
+pullup (inout_data[2]);
+//pullup (inout_data[1]);
+//pullup (inout_data[0]);
+
 `ifdef IPEN 
+  assign si_so0 = inout_data[0]   ;
+  assign so_so1 = inout_data[1]   ;
   nand_spi_chip_wrapper uut  (
     .SI               (inout_data[0]      ), 
     .SCK              (io_clk_out         ), 
@@ -224,6 +231,27 @@ always @(SCK) begin
 end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+//  Statistic the uut.SCK counter
+////////////////////////////////////////////////////////////////////////////////////////////////////
+reg             uut_sck1d               ;
+reg     [15: 0] uut_sckcnt              ;
+
+always @(posedge ssi_clk)begin
+  uut_sck1d  <= uut.SCK     ;
+end
+
+always @(posedge ssi_clk)begin
+  if(!uut.CS_N)begin
+    if( (~uut_sck1d) && uut.SCK )begin
+      uut_sckcnt <= uut_sckcnt + 16'h1;
+    end
+  end
+  else begin
+    uut_sckcnt <= 16'h0;
+  end
+end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 //  TASKS 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //`include "nand_spi_tasks.vh"
@@ -234,7 +262,8 @@ end
 //  add sub testcase  
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //`include "subtestcase.vh"
-`include "mstspi_testcase.vh"
+//`include "mstspi_testcase.vh"
+`include "mstspi_tc_single_rd_wr.vh"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //  generate fsdb	

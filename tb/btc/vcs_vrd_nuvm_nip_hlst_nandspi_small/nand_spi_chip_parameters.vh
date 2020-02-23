@@ -122,7 +122,7 @@ reg [7:0]        onfi_params_array [NUM_COL-1 : 0]; // packed array
 //-------------------------------------------
 //  MEMORY Initialization 
 //-------------------------------------------
-parameter [100*8:1] memory_file = "./vcs_vrd_nuvm_nip_nhls_jc5_spi/nand_spi_chip_mem.vmf";
+parameter [40*8:1] memory_file = "nand_spi_chip_mem.vmf";
 
 task setup_params_array;
     integer k;

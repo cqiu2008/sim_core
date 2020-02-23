@@ -180,20 +180,20 @@ checktc:
 	fi ; 
 
 ####Run simulation
-.PHONY:sim1
-sim1:buildsim
-	cd $(RUNSIM_ROOT)/run_$(PAR_TC) ; \
-	make -f $(MAKEFILE_SCRIPT)/$(PAR_SUB_MAKEFILE) preparation ; \
-	make -f $(MAKEFILE_SCRIPT)/$(PAR_SUB_MAKEFILE) sim | tee sim.log
 
 .PHONY:sim
 sim:buildsim
 	cd $(RUNSIM_ROOT)/run_$(PAR_TC) ; \
-	cp -rf $(RUNSIM_ROOT)/Makefile.flist $(RUNSIM_ROOT)/run_$(PAR_TC) ; \
+	make -f $(MAKEFILE_SCRIPT)/$(PAR_SUB_MAKEFILE) preparation ; \
 	make -f $(MAKEFILE_SCRIPT)/$(PAR_SUB_MAKEFILE) sim | tee sim.log
 
+##.PHONY:sim
+##sim:buildsim
+##	cd $(RUNSIM_ROOT)/run_$(PAR_TC) ; \
+##	cp -rf $(RUNSIM_ROOT)/Makefile.flist $(RUNSIM_ROOT)/run_$(PAR_TC) ; \
+##	make -f $(MAKEFILE_SCRIPT)/$(PAR_SUB_MAKEFILE) sim | tee sim.log
 
-	#make -f $(MAKEFILE_SCRIPT)/$(PAR_SUB_MAKEFILE) preparation ; \
+#make -f $(MAKEFILE_SCRIPT)/$(PAR_SUB_MAKEFILE) preparation ; \
 
 ####Create the testcase simulation folder and some script...
 .PHONY:buildsim

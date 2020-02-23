@@ -25,9 +25,9 @@
 // reg  [31:0]     oprdata                                       ; // Get Read Data bus
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//  reset 
+//  reset_sig
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-task reset;
+task reset_sig;
   begin
     presetn     = 1'b0      ;
     ssi_rst_n   = 1'b0      ;        
@@ -116,18 +116,18 @@ endtask
 // SSI_MAX_XFER_SIZE = 32
 // SSI_SPI_MODE = 0 , (Only single spi mode)
 task wregssi_ctrl0; 
-  input [ 9: 0]BASE_ADDR      ;
-  input        sste           ;// CTRLR0[24] slave select toggle enable
-  input [ 1: 0]spi_frf        ;// CTRLR0[22:21] slave frame format 
-  input [ 4: 0]dfs_32         ;// CTRLR0[20:16] data frame bits = dfs_32 + 1
-  input [ 3: 0]cfs            ;// CTRLR0[15:12] control frame size = cfs + 1
-  input        srl            ;// CTRLR0[11]  for testing purposes 
-  input        slv_oe         ;// CTRLR0[10]  slv output enable 
-  input [ 1: 0]tmod           ;// CTRLR0[9:8] Transfer Mode,==00 T/R,==01 only T ==10 only R
-  input        scpol          ;// CTRLR0[7] =0, inactive when serial clock is low 
-  input        scph           ;// CTRLR0[6] =0, data valid at 1st edge of serial clk
-  input [ 5: 4]frf            ;// CTRLR0[5:4] =0, motorolla spi frame format 
-  input [ 3: 0]dfs            ;// CTRLR0[3:0] when SSI_MAX_XFER_SIZE = 16, it is valid 
+  input [ 9: 0]BASE_ADDR      ;// 0 
+  input        sste           ;// 1 CTRLR0[24] slave select toggle enable
+  input [ 1: 0]spi_frf        ;// 2 CTRLR0[22:21] spi frame format 
+  input [ 4: 0]dfs_32         ;// 3 CTRLR0[20:16] data frame bits = dfs_32 + 1
+  input [ 3: 0]cfs            ;// 4 CTRLR0[15:12] control frame size = cfs + 1
+  input        srl            ;// 5 CTRLR0[11]  for testing purposes 
+  input        slv_oe         ;// 6 CTRLR0[10]  slv output enable 
+  input [ 1: 0]tmod           ;// 7 CTRLR0[9:8] Transfer Mode,==00 T/R,==01 only T ==10 only R
+  input        scpol          ;// 8 CTRLR0[7] =0, inactive when serial clock is low 
+  input        scph           ;// 9 CTRLR0[6] =0, data valid at 1st edge of serial clk
+  input [ 5: 4]frf            ;//10 CTRLR0[5:4] =0, motorolla spi frame format 
+  input [ 3: 0]dfs            ;//11 CTRLR0[3:0] when SSI_MAX_XFER_SIZE = 16, it is valid 
   reg   [31: 0]regin          ;
   begin
   //set the value for write
@@ -201,6 +201,22 @@ task wregssi_mwcr;
     regin[0]     = mwmod      ;
   //write it to apb bus
     writereg(BASE_ADDR+MWCR,regin);
+  end
+endtask
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//  wregssi_ser (Slave Enable Register)
+////////////////////////////////////////////////////////////////////////////////////////////////////
+task wregssi_ser; 
+  input [ 9: 0]BASE_ADDR      ;
+  input [ 3: 0]en             ;
+  reg   [31: 0]regin          ;
+  begin
+  //set the value for write
+    regin[31: 4] = 0          ; 
+    regin[ 3: 0] = en         ; 
+  //write it to apb bus
+    writereg(BASE_ADDR+SER,regin);
   end
 endtask
 

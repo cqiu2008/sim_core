@@ -48,7 +48,11 @@ export Verdi
 export IP_PRJ
 export MAKEFILE_CMPL
 export WEB_ROOT
+export HOST_NAME
+export HOST_CQIU
 
+HOST_NAME = $(shell hostname)
+HOST_CQIU = cqiuLenovo
 #VVD_ROOT		= /opt/tool/xilinx/vivado2016_02/Vivado/2016.2
 #VVD_ROOT		= /opt/tool/xilinx/vivado2014_02/Vivado/2014.2
 ##VVD_ROOT		= /opt/tool/xilinx/vivado2017_03/Vivado/2017.3
@@ -74,12 +78,18 @@ FLIST_SCRIPT	= $(SCRIPTLIN_ROOT)/flist_script
 RUNSIM_ROOT		= $(shell cd ./;pwd)
 MACRO_RTL_FILE  = $(RTL_ROOT)/macro_rtl
 #UVM_HOME		= /opt/tool/mentor/questasim10_4c/questasim/verilog_src/uvm-1.1d
-VCS_HOME        = /opt/tool/synopsys/vcs_mx_vl201606
-#NOVAS_HOME 		= /opt/tool/novas/verdi3_201403
-NOVAS_HOME 		= /opt/tool/synopsys/verdi_vL_2016_06_1
+
+ifeq ($(HOST_NAME),$(HOST_CQIU))
+	VCS_HOME      = /opt/tool/synopsys/vcs_mx_vl201606
+	NOVAS_HOME 		= /opt/tool/synopsys/verdi_vL_2016_06_1
+else
+	VCS_HOME      = /edatools/synopsys/vcs-mx_vO-2018.09-SP2/vcs-mx/O-2018.09-SP2
+	NOVAS_HOME 		= /edatools/synopsys/verdi_vO-2018.09-SP2/verdi/Verdi_O-2018.09-SP2
+	VERDI_HOME 		= /edatools/synopsys/verdi_vO-2018.09-SP2/verdi/Verdi_O-2018.09-SP2
+endif
+
 NOVAS_ROOT		= $(VF_ROOT)/novas
 NOVAS_RC		= $(NOVAR_ROOT)/novas.rc
-
 
 # PLATFORM   		= LINUXAMD64
 # LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/MODELSIM/$(PLATFORM)
@@ -130,6 +140,7 @@ TC_WORDS :=$(words $(TC_LIST))
 .PHONY:default
 default:
 	@echo -e "\033[40;32m *****************************************************************************  \033[0m"
+	@echo -e "\033[40;46m Current Host Name is [$(HOST_NAME)]******************************************  \033[0m"
 	@echo -e "\033[40;32m Build Library ***************************************************************  \033[0m"
 	@echo -e "\033[40;32m make build_vvd1602***********************************************************  \033[0m"
 	@echo -e "\033[40;32m make build_vvd1703***********************************************************  \033[0m"
@@ -383,4 +394,5 @@ clean:
 	rm -rf vivado* ; \
 	rm -rf compile* ; \
 	rm -rf webtalk* ; \
+	rm -rf $(BTC_ROOT)/$(PAR_TC)/verdiLog ; \
 	rm -rf verdiLog

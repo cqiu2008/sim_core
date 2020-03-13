@@ -1,0 +1,73 @@
+@verdi rc file Version 1.0
+[General]
+VerdiVersion = Verdi3_L-2016.06-1
+[KeyNote]
+Line1 = Automatic Backup 0
+[TestBench]
+ConstrViewShow = 0
+InherViewShow = 0
+FSDBMsgShow = 0
+AnnotationShow = 0
+powerDumped = 0
+[hb]
+postSimFile = /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_jc5_hqspi/tb_dut_top.fsdb
+syncTime = 3873943400
+viewport = 65 24 1855 1056 612 690 94 1853
+activeNode = "tb_dut_top.uut"
+activeScope = "tb_dut_top.uut"
+activeFile = "/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi/chip/nand_spi_chip_wrapper.v"
+interactiveMode = False
+viewType = Source
+simulatorMode = False
+sourceBeginLine = 37
+baMode = False
+srcLineNum = True
+syncSignal = False
+traceMode = Hierarchical
+showTraceInSchema = True
+paMode = False
+funcMode = False
+traceCrossHier = True
+DnDtraceCrossHierOnly = True
+traceIncTopPort = False
+leadingZero = False
+signalPane = False
+Scope1 = "tb_dut_top.uut"
+Scope2 = "tb_dut_top.U_hqspi_mst_DW_apb_ssi_top"
+Scope3 = "tb_dut_top.U_hqspi_mst_DW_apb_ssi_top.U_hqspi_mst_DW_apb_ssi"
+Scope4 = "tb_dut_top"
+Scope5 = "hqspi_mst_DW_apb_ssi_bvm02"
+rangeSelection = 39 45 1 1 1 1
+sdfCheckUndef = FALSE
+simFlow = FALSE
+[hb.sourceTab.1]
+scope = tb_dut_top.uut
+File = /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi/chip/nand_spi_chip_wrapper.v
+Line = 38
+[imp.design1]
+dbEnum =  oh
+invokeDir = /home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi
+design = DebussyLib
+hostCommand = hostCommand -L /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi -f /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_jc5_hqspi/flist.f
+[nMemoryManager]
+FsdbFile = /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_jc5_hqspi/tb_dut_top.fsdb
+UserActionNum = 0
+nMemWindowNum = 0
+[wave.0]
+viewPort = 0 28 1237 690 295 71
+SessionFile = /home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi/verdiLog/novas_autosave.ses.wave.0
+displayGrid = FALSE
+hierarchicalName = FALSE
+snap = TRUE
+displayLeadingZeros = FALSE
+fixDelta = FALSE
+displayCursorMarker = FALSE
+autoUpdate = FALSE
+highlightGlitchs = FALSE
+waveformSync = FALSE
+displayErrors = TRUE
+displayMsgSymbols = TRUE
+showMsgDescriptions = TRUE
+autoFit = FALSE
+displayDeltaY = FALSE
+centerCursor = FALSE

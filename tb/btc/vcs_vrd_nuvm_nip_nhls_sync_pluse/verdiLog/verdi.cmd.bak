@@ -1,0 +1,8 @@
+debImport "-L" \
+          "/home/cqiu/work/prj/simPrj/sim_sync_pulse/tb/btc/vcs_vrd_nuvm_nip_nhls_sync_pluse" \
+          "-f" \
+          "/home/cqiu/work/prj/simPrj/sim_sync_pulse/runsim/run_vcs_vrd_nuvm_nip_nhls_sync_pluse/flist.f"
+debLoadSimResult \
+           /home/cqiu/work/prj/simPrj/sim_sync_pulse/runsim/run_vcs_vrd_nuvm_nip_nhls_sync_pluse/tb_dut_top.fsdb
+wvCreateWindow
+debExit

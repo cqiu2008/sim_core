@@ -1,0 +1,12 @@
+*design* DebussyLib (btIdent Verdi3_L-2016.06-1)
+Command arguments:
+    +define+verilog
+    -L /home/cqiu/work/prj/simPrj/sim_sync_pulse/tb/btc/vcs_vrd_nuvm_nip_nhls_sync_pluse
+    -f /home/cqiu/work/prj/simPrj/sim_sync_pulse/runsim/run_vcs_vrd_nuvm_nip_nhls_sync_pluse/flist.f
+        /home/cqiu/work/prj/simPrj/sim_sync_pulse/rtl/sync_pulse.v
+        /home/cqiu/work/prj/simPrj/sim_sync_pulse/tb/btc/vcs_vrd_nuvm_nip_nhls_sync_pluse/tb_dut_top.sv
+
+Highest level modules:
+tb_dut_top
+
+Total	0 error(s),   0 warning(s)

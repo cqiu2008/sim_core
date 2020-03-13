@@ -99,11 +99,9 @@ function void e1_env::connect_phase(uvm_phase phase);
 	output_agt[i].ap.connect(agt_scb_fifo[i].analysis_export);
 	my_e1_scb[i].act_port.connect(agt_scb_fifo[i].blocking_get_export);
 
-
 	////=== pointer
 	input_agt[i].sqr.out_mon = output_agt[i].mon;
 	end
-	
 
 endfunction
 

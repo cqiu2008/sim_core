@@ -1,0 +1,19 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//  TASKS 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+task clkdly;
+  input [31:0]num;
+  begin
+    repeat(num)begin
+      @(posedge aclk_peri_2wrap);
+    end
+    #1;
+  end
+endtask
+
+task reset;
+  chiprstn_top              =  1'b0    ;// i
+  clkdly(100);
+  chiprstn_top              =  1'b1    ;// i
+  clkdly(100);
+endtask

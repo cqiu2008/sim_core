@@ -12,9 +12,12 @@ export PLATFORM
 export UVM_HOME
 export LD_LIBRARY_PATH
 
-UVM_HOME = /opt/tool/mentor/questasim10_4c/questasim/verilog_src/uvm-1.1d
-PLATFORM = LINUXAMD64
-LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)
+ifeq ($(HOST_NAME),$(HOST_CQIU))
+	UVM_HOME = /opt/tool/mentor/questasim10_4c/questasim/verilog_src/uvm-1.1d
+	PLATFORM = LINUXAMD64
+	LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)
+else
+endif
 
 #PLATFORM   		= LINUXAMD64
 #LD_LIBRARY_PATH = $(NOVAS_HOME)/share/PLI/VCS/$(PLATFORM)
@@ -52,6 +55,7 @@ vloglist:
 	sed -i '/ipcoresim.*_inst\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; \
 	sed -i '/ipcoresim.*_xilinx\./d' $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist ; 
 
+
 ####arrange the Makfile.flist, take some .v to the first or the end position
 .PHONY:arrange_flist
 arrange_flist:
@@ -59,27 +63,77 @@ arrange_flist:
     $(PERL_SCRIPT)/arrange_lst $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist begin cc_constants ; \
     $(PERL_SCRIPT)/arrange_lst $(RUNSIM_ROOT)/run_$(PAR_TC)/Makefile.flist end undef  
 
+.PHONY:simlintok
+simlintok:
+	vcs -full64 \
+    -debug_acc+all -debug_region+cell+encrypt \
+    -line  \
+    +lint=TFIPC-L \
+    +v2k -v2005 \
+    -sverilog -fsdb \
+    -timescale=1ns/10ps \
+    +define+IVCS_RELAX_COLL_CHECK \
+		$(VLOG_LIST)  \
+		-l vcs_compile.log 
+
+.PHONY:sim111
+sim111:
+	vcs -full64 \
+		-fsdb \
+    -debug_acc+all -debug_region+cell+encrypt \
+    -line  \
+    +lint=TFIPC-L \
+    +v2k -v2005 \
+    -sverilog -fsdb \
+    -timescale=1ns/10ps \
+    +define+IVCS_RELAX_COLL_CHECK \
+		+define+ASSERT_ON+COVER_ON \
+		-y ${VCS_HOME}/packages/sva/ \
+		+libext+.sv \
+		+incdir+${VCS_HOME}/packages/sva \
+		+incdir+$(TB_ROOT) \
+		+incdir+$(BTC_ROOT)/$(PAR_TC) \
+		$(VLOG_LIST)  \
+		-l vcs_compile.log \
+		$(RUN_VER) ; 
+
 .PHONY:sim
 sim:
-	vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed \
-		-sverilog \
-		-assert enable_diag \
-		-debug_access+all \
-		-timescale=1ns/1ps \
-		+define+ASSERT_ON+CONVER_ON \
-    +incdir+$(TB_ROOT) \
-    +incdir+$(BTC_ROOT)/$(PAR_TC) \
-		+define+ASSERT_ON+CONVER_ON \
-    +incdir+$(VCS_HOME)/packages/sva \
-    $(VLOG_LIST) \
-		| tee vcs.log ; \
-    $(RUNSIM_ROOT)/run_$(PAR_TC)/simv -l run.log -assert filter+success -assert maxsuccess=3 ;
+	@if [[ $(HOST_NAME) != $(HOST_CQIU) ]] ; then \
+		vcs +vc -sverilog \
+			-debug_access+all \
+			-timescale=1ns/1ps \
+			+define+ASSERT_ON+COVER_ON \
+			-y ${VCS_HOME}/packages/sva/ \
+			+libext+.sv \
+			+incdir+${VCS_HOME}/packages/sva \
+			+incdir+$(TB_ROOT) \
+			+incdir+$(BTC_ROOT)/$(PAR_TC) \
+			$(VLOG_LIST)  \
+			-l comp.lo ;	\
+			$(RUN_VER) ; \
+	else \
+		vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed \
+			-sverilog \
+			-assert enable_diag \
+			-debug_access+all \
+			-timescale=1ns/1ps \
+			+define+ASSERT_ON+CONVER_ON \
+  	  +incdir+$(TB_ROOT) \
+  	  +incdir+$(BTC_ROOT)/$(PAR_TC) \
+			+define+ASSERT_ON+CONVER_ON \
+  	  +incdir+$(VCS_HOME)/packages/sva \
+  	  $(VLOG_LIST) \
+			| tee vcs.log ; \
+			$(RUNSIM_ROOT)/run_$(PAR_TC)/simv -l run.log -assert filter+success -assert maxsuccess=3 ;	\
+	fi ;
 
 
-		#-P /opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/novas.tab \
-    #/opt/tool/synopsys/verdi_vL_2016_06_1/share/PLI/VCS/LINUXAMD64/pli.a \
 
+#	$(RUNSIM_ROOT)/run_$(PAR_TC)/simv -l run.log -assert filter+success -assert maxsuccess=3 ; \
 
+#.PHONY:sim_jeejio
+#sim_jeejio:
 # .PHONY:sim1
 # sim1:
 # 	vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed \
@@ -120,5 +174,5 @@ verdi1:
 
 .PHONY:verdi
 verdi:
-	cd $(RUNSIM_ROOT)/run_$(PAR_TC)	; \
+	cd $(BTC_ROOT)/$(PAR_TC)	; \
     verdi -rcFile $(VF_ROOT)/novas/novas.rc -f $(RUNSIM_ROOT)/run_$(PAR_TC)/verdi.flist -ssf  $(RUNSIM_ROOT)/run_$(PAR_TC)/tb_dut_top.fsdb &

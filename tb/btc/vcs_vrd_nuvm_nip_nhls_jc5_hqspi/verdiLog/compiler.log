@@ -1,0 +1,433 @@
+*design* DebussyLib (btIdent Verdi3_L-2016.06-1)
+Command arguments:
+    +define+verilog
+    -L /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi
+    -f /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_jc5_hqspi/flist.f
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_dm_gen.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_sclkgen.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_cc_constants.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_bcm_params.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_biu.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_mstfsm.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_intctl.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_bcm21.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_rxsr.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_regfile.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_txsr.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_dma.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_bvm02.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_shift.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_bcm05.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_bcm07.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_bcm57.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi-undef.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst_DW_apb_ssi_top.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi/chip/nand_spi_chip_wrapper.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi/chip/nand_spi_chip.v
+        /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi/tb_dut_top.sv
+
+
+*Error* macro `PSTRB_WIDTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_dm_gen.v", 39: 
+
+*Error* macro `DM_FIFO_W not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_dm_gen.v", 40: 
+
+*Error* macro `TX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 74: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 75: 
+
+*Error* macro `SSI_MAX_XFER_SIZE not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 77: 
+
+*Error* macro `DM_FIFO_W not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 78: 
+
+*Error* macro `SSI_MAX_XFER_SIZE not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 81: 
+
+*Error* macro `SSI_MAX_XFER_SIZE not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 84: 
+
+*Error* macro `SSI_MAX_XFER_SIZE not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 85: 
+
+*Error* macro `SSI_MAX_XFER_SIZE not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 86: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 97: 
+
+*Error* usage of [ is supported only if the option '-sv' is specified
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 97: 
+
+*Error* macro `TX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 98: 
+
+*Error* usage of [ is supported only if the option '-sv' is specified
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 98: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 103: 
+
+*Error* usage of [ is supported only if the option '-sv' is specified
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 103: 
+
+*Error* macro `SSI_RX_FIFO_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 103: 
+
+*Error* Syntax error at localparam
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 104: 
+
+*Error* macro `TX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 104: 
+
+*Error* macro `SSI_TX_FIFO_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 104: 
+
+*Error* macro `DM_FIFO_W not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 114: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 115: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 116: 
+
+*Error* macro `TX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 117: 
+
+*Error* macro `TX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 118: 
+
+*Error* macro `SSI_MAX_XFER_SIZE not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 121: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 131: 
+
+*Error* macro `TX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 135: 
+
+*Error* usage of [ is supported only if the option '-sv' is specified
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 135: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 136: 
+
+*Error* usage of [ is supported only if the option '-sv' is specified
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 136: 
+
+*Error* macro `SSI_S2P_SYNC_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 178: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 178: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 179: 
+
+*Error* macro `SSIC_S2P_VERIF_EN not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 179: 
+
+*Error* Syntax error at )
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 180: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 213: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 216: 
+
+*Error* Syntax error at }
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 216: 
+
+*Error* macro `SSI_RX_FIFO_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 216: 
+
+*Error* macro `SSI_P2S_SYNC_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 237: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 237: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 238: 
+
+*Error* macro `SSIC_P2S_VERIF_EN not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 238: 
+
+*Error* Syntax error at )
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 239: 
+
+*Error* macro `TX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 274: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 273: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 274: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 275: 
+
+*Error* macro `TX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 275: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 276: 
+
+*Error* macro `SSI_S2P_SYNC_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 276: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 277: 
+
+*Error* macro `SSI_P2S_SYNC_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 277: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 278: 
+
+*Error* Syntax error at )
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 279: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 314: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 313: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 314: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 315: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 315: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 316: 
+
+*Error* macro `SSI_P2S_SYNC_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 316: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 317: 
+
+*Error* macro `SSI_S2P_SYNC_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 317: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 318: 
+
+*Error* Syntax error at )
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 319: 
+
+*Error* macro `SSI_MAX_XFER_SIZE not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 353: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 353: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 354: 
+
+*Error* macro `RX_RAM_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 354: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 355: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 356: 
+
+*Error* macro `RX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 356: 
+
+*Error* Syntax error at )
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 357: 
+
+*Error* Syntax error at (
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 358: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 359: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 360: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 361: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 362: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 363: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 364: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 365: 
+
+*Error* Syntax error at )
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 366: 
+
+*Error* macro `TX_FIFO_WIDTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 372: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 372: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 373: 
+
+*Error* macro `TX_RAM_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 373: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 374: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 375: 
+
+*Error* macro `TX_ABW not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 375: 
+
+*Error* Syntax error at )
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 376: 
+
+*Error* Syntax error at (
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 377: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 378: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 379: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 380: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 381: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 382: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 383: 
+
+*Error* Syntax error at ,
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 384: 
+
+*Error* Syntax error at )
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 385: 
+
+*Warning* bit-select out of range
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 387: 
+
+*Warning* bit-select out of range
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 387: 
+
+*Error* macro `SSI_DFLT_SCLK_OUT not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_sclkgen.v", 133: 
+
+*Error* Syntax error at end
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_sclkgen.v", 134: 
+
+*Error* macro `SSI_P2S_SYNC_DEPTH not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_sclkgen.v", 197: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_sclkgen.v", 197: 
+
+*Error* Syntax error at .
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_sclkgen.v", 198: 
+
+*Error* macro `SSIC_P2S_VERIF_EN not defined
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_sclkgen.v", 198: 
+
+*Error* Syntax error at )
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_sclkgen.v", 199: 
+
+*Warning* too many digits in decimal
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_mstfsm.v", 1147: 
+
+*Error* illegal LHS in continuous assignment
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi/tb_dut_top.sv", 176: 
+Highest level modules:
+hqspi_mst_DW_apb_ssi_bvm02
+hqspi_mst_DW_apb_ssi_bcm07
+hqspi_mst_DW_apb_ssi_bcm57
+tb_dut_top
+
+
+*Error* failed to find identifier TX_FIFO_DEPTH
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 273: 
+
+*Error* failed to find identifier RX_FIFO_DEPTH
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 313: 
+
+*Error* view U_rx_overflow_tgl_sync is not defined for instance U_rx_overflow_tgl_sync
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 182: 
+
+*Error* view U_fifo_rst_n_sync is not defined for instance U_fifo_rst_n_sync
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 241: 
+
+*Error* view U_tx_sync_fifo_cntrlr is not defined for instance U_tx_sync_fifo_cntrlr
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 280: 
+
+*Error* view U_rx_sync_rxds_fifo_cntrlr is not defined for instance U_rx_sync_rxds_fifo_cntrlr
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_fifo.v", 320: 
+
+*Error* view U_sclk_active_sync is not defined for instance U_sclk_active_sync
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi_sclkgen.v", 201: 
+
+*Warning* port sizes differ (2 vs 5) in port connection (port txftlr)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 523: 
+
+*Warning* port sizes differ (2 vs 5) in port connection (port rxftlr)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 524: 
+
+*Warning* port sizes differ (2 vs 32) in port connection (port tx_push_data)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 526: 
+
+*Warning* port sizes differ (2 vs 4) in port connection (port dm_push_data)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 527: 
+
+*Warning* port sizes differ (2 vs 32) in port connection (port rx_push_data)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 530: 
+
+*Warning* port sizes differ (2 vs 32) in port connection (port tx_pop_data)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 533: 
+
+*Warning* port sizes differ (2 vs 32) in port connection (port tx_dm_pop_data)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 534: 
+
+*Warning* port sizes differ (2 vs 32) in port connection (port rx_pop_data)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 535: 
+
+*Warning* port sizes differ (65536 vs 6) in port connection (port tx_fifo_wc)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 539: 
+
+*Warning* port sizes differ (65536 vs 6) in port connection (port rx_fifo_wc)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 540: 
+
+*Warning* port sizes differ (2 vs 4) in port connection (port pstrb)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 554: 
+
+*Warning* port sizes differ (2 vs 4) in port connection (port dm_push_data)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst/hqspi_mst_DW_apb_ssi.v", 555: 
+
+*Warning* port sizes differ (32 vs 29) in port connection (port paddr)
+"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/rtl/hqspi_jc5_1st_20200222/hqspi_mst_DW_apb_ssi_top.v", 179: 
+Total	116 error(s),   16 warning(s)

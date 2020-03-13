@@ -454,17 +454,17 @@ importDesignForm = 509,132,634,611
 QwInfoMsgDlg = 337,295,750,250
 aboutVerdiDialog = 319,73,773,623
 srcInstanceTreeWaiver = 467,307,497,234
-qWaveSignalDialog = 2207,142,856,563
-QwWarnMsgDlg = 150,534,1301,533
-QwUserAskDlg = 820,946,324,130
+QwWarnMsgDlg = 65,52,1301,716
+qWaveSignalDialog = 287,170,856,563
+QwUserAskDlg = 1042,638,324,130
 [Relationship]
 hideRecursiceNode = FALSE
 [Session Cache]
-4 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaFK/runsim/run_qst_vrd_nuvm_vvd1602_hls_FK/verdiLog/novas_autosave.ses
 5 = /media/cqiu/e/work/prj/AIPrj/sim/sim_cnnaRAM/runsim/run_qst_vrd_nuvm_vvd1602_hls_190530bb/verdiLog/novas_autosave.ses
-2 = /home/cqiu/work/prj/simPrj/sim_spi_jc5/runsim/run_vcs_vrd_nuvm_nip_hlst_jc5_spi/verdiLog/novas_autosave.ses
-3 = /home/cqiu/work/prj/simPrj/sim_tmp-spi/runsim/run_vcs_vrd_nuvm_nip_nhls_nandspi/verdiLog/novas_autosave.ses
-1 = /home/cqiu/work/prj/simPrj/sim_spi_jc5/runsim/run_vcs_vrd_nuvm_nip_hlst_jc5_spi/verdiLog/novas_autosave.ses
+1 = /home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_smicram/verdiLog/novas_autosave.ses
+2 = /home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi/verdiLog/novas_autosave.ses
+3 = /home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_sync_pluse/verdiLog/novas_autosave.ses
+4 = /home/cqiu/work/prj/simPrj/sim_spi_jc5/runsim/run_vcs_vrd_nuvm_nip_hlst_jc5_spi/verdiLog/novas_autosave.ses
 [Signal List]
 sigListBackgroundColor = ID_GRAY6
 sigListForegroundColor = ID_BLACK
@@ -646,7 +646,7 @@ pdmlCommand = ID_BLACK
 pdmlMacro = ID_BLACK
 font = FIXED14
 [Text.1]
-viewport = 55 -14 1855 1056 45
+viewport = 65 24 1301 744 45
 [TextPrinter]
 Orientation = Landscape
 Indicator = FALSE
@@ -745,8 +745,8 @@ waveform_vertical_scroll_bar = TRUE
 scope_to_save_with_macro
 open_file_dir
 open_rc_file_dir
-getSignalForm = 2207 142 856 563 179 465 427 110
-viewPort = 0 28 1243 436 295 71
+getSignalForm = 287 142 856 563 444 465 358 225
+viewPort = 0 28 1025 375 222 126
 signalSpacing = 5
 digitalSignalHeight = 15
 analogSignalHeight = 98
@@ -994,11 +994,11 @@ curveWindow_Drag&Drop_Mode = TRUE
 hspiceIncOpenMode = TRUE
 pcSelectMode = TRUE
 hierarchyDelimiter = /
-RecentFile1 = "\"/home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_hlst_jc5_spi/rc/cm.rc\""
-RecentFile2 = "\"/home/cqiu/work/prj/simPrj/sim_spi_jc5/runsim/run_vcs_vrd_nuvm_nip_hlst_jc5_spi/tb_dut_top.fsdb\""
-RecentFile3 = "\"/home/cqiu/work/prj/simPrj/sim_model_nand_spi/runsim/run_vcs_vrd_nuvm_nip_hlst_nandspi_small/tb_dut_top.fsdb\""
-RecentFile4 = "\"/home/cqiu/work/prj/simPrj/sim_model_nand_spi/runsim/run_vcs_vrd_nuvm_nip_nhls_nandspi/tb_dut_top.fsdb\""
-RecentFile5 = "\"/home/cqiu/work/prj/simPrj/sim_spi_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_jc5_spi/tb_dut_top.fsdb\""
+RecentFile1 = "\"/home/cqiu/work/prj/simPrj/sim_smic40_ram/runsim/run_vcs_vrd_nuvm_nip_nhls_smicram/tb_dut_top.fsdb\""
+RecentFile2 = "\"/home/cqiu/work/prj/simPrj/sim_cru_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_pericru_jc5/tb_dut_top.fsdb\""
+RecentFile3 = "\"/home/cqiu/work/prj/simPrj/sim_hqspi_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_jc5_hqspi/tb_dut_top.fsdb\""
+RecentFile4 = "\"/home/cqiu/work/prj/simPrj/sim_sync_pulse/runsim/run_vcs_vrd_nuvm_nip_nhls_sync_pluse/tb_dut_top.fsdb\""
+RecentFile5 = "\"/home/cqiu/work/prj/simPrj/sim_pericru_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_pericru_jc5/tb_dut_top.fsdb\""
 open_file_time_range = FALSE
 value_window_aligment = Right
 signal_window_alignment = Auto
@@ -1458,7 +1458,7 @@ AddImportArgument = FALSE
 LineBreakWithScope = TRUE
 StopAfterCompileOption = -s
 [wave.0]
-viewPort = 0 28 1243 436 295 71
+viewPort = 0 28 1025 375 222 126
 [wave.1]
 viewPort = 127 219 960 332 100 65
 [wave.2]

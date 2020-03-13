@@ -1,0 +1,110 @@
+Magic 271485
+Revision Verdi3_L-2016.06-1
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 28 1025 375 222 126
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/home/cqiu/work/prj/simPrj/sim_smic40_ram/runsim/run_vcs_vrd_nuvm_nip_nhls_smicram/tb_dut_top.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 0.000000 351258810.000000
+cursor 46061000.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 0
+; marker line index
+markerPos 41
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G1"
+activeDirFile "" "/home/cqiu/work/prj/simPrj/sim_smic40_ram/runsim/run_vcs_vrd_nuvm_nip_nhls_smicram/tb_dut_top.fsdb"
+addSignal -h 15 /tb_dut_top/U_smic40ram512x32/clk
+addSignal -h 15 -holdScope cen
+addSignal -h 15 -holdScope wr
+addSignal -h 15 -UNSIGNED -HEX -holdScope addr[8:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope din[31:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope bwen[31:0]
+addSignal -expanded -h 15 -UNSIGNED -HEX -holdScope dout[31:0]
+addSignal -h 15 -holdScope dout[31]
+addSignal -h 15 -holdScope dout[30]
+addSignal -h 15 -holdScope dout[29]
+addSignal -h 15 -holdScope dout[28]
+addSignal -h 15 -holdScope dout[27]
+addSignal -h 15 -holdScope dout[26]
+addSignal -h 15 -holdScope dout[25]
+addSignal -h 15 -holdScope dout[24]
+addSignal -h 15 -holdScope dout[23]
+addSignal -h 15 -holdScope dout[22]
+addSignal -h 15 -holdScope dout[21]
+addSignal -h 15 -holdScope dout[20]
+addSignal -h 15 -holdScope dout[19]
+addSignal -h 15 -holdScope dout[18]
+addSignal -h 15 -holdScope dout[17]
+addSignal -h 15 -holdScope dout[16]
+addSignal -h 15 -holdScope dout[15]
+addSignal -h 15 -holdScope dout[14]
+addSignal -h 15 -holdScope dout[13]
+addSignal -h 15 -holdScope dout[12]
+addSignal -h 15 -holdScope dout[11]
+addSignal -h 15 -holdScope dout[10]
+addSignal -h 15 -holdScope dout[9]
+addSignal -h 15 -holdScope dout[8]
+addSignal -h 15 -holdScope dout[7]
+addSignal -h 15 -holdScope dout[6]
+addSignal -h 15 -holdScope dout[5]
+addSignal -h 15 -holdScope dout[4]
+addSignal -h 15 -holdScope dout[3]
+addSignal -h 15 -holdScope dout[2]
+addSignal -h 15 -holdScope dout[1]
+addSignal -h 15 -holdScope dout[0]
+addGroup "G2"
+addSignal -h 15 -UNSIGNED -HEX /tb_dut_top/U_smic40ram512x32/dly[1:0]
+addGroup "G3"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+activeDirFile "" "/home/cqiu/work/prj/simPrj/sim_smic40_ram/runsim/run_vcs_vrd_nuvm_nip_nhls_smicram/tb_dut_top.fsdb"
+
+GETSIGNALFORM_SCOPE_HIERARCHY_BEGIN
+getSignalForm close
+
+"/tb_dut_top"
+"/tb_dut_top/U_smic40ram512x32"
+
+SCOPE_LIST_BEGIN
+"/tb_dut_top"
+"/tb_dut_top/U_smic40ram512x32"
+SCOPE_LIST_END
+
+GETSIGNALFORM_SCOPE_HIERARCHY_END
+
+

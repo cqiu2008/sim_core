@@ -1,0 +1,69 @@
+@verdi rc file Version 1.0
+[General]
+VerdiVersion = Verdi3_L-2016.06-1
+[KeyNote]
+Line1 = Automatic Backup 0
+[TestBench]
+ConstrViewShow = 0
+InherViewShow = 0
+FSDBMsgShow = 0
+AnnotationShow = 0
+powerDumped = 0
+[hb]
+postSimFile = /home/cqiu/work/prj/simPrj/sim_smic40_ram/runsim/run_vcs_vrd_nuvm_nip_nhls_smicram/tb_dut_top.fsdb
+syncTime = 46061000
+viewport = 65 24 1301 744 270 378 178 1299
+activeNode = "tb_dut_top.U_smic40ram512x32"
+activeScope = "tb_dut_top.U_smic40ram512x32.U_smicram512x32"
+activeFile = "/home/cqiu/work/prj/simPrj/sim_smic40_ram/tb/btc/vcs_vrd_nuvm_nip_nhls_smicram/model/S40NLLVHSSPRLRK_DL_X128Y4D32B4.v"
+interactiveMode = False
+viewType = Source
+simulatorMode = False
+sourceBeginLine = 243
+baMode = False
+srcLineNum = True
+syncSignal = False
+traceMode = Hierarchical
+showTraceInSchema = True
+paMode = False
+funcMode = False
+traceCrossHier = True
+DnDtraceCrossHierOnly = True
+traceIncTopPort = False
+leadingZero = False
+signalPane = False
+Scope1 = "tb_dut_top.U_smic40ram512x32.U_smicram512x32"
+multipleSelection = 1 66 2 0 0
+sdfCheckUndef = FALSE
+simFlow = FALSE
+[hb.sourceTab.1]
+scope = tb_dut_top.U_smic40ram512x32.U_smicram512x32
+File = /home/cqiu/work/prj/simPrj/sim_smic40_ram/tb/btc/vcs_vrd_nuvm_nip_nhls_smicram/model/S40NLLVHSSPRLRK_DL_X128Y4D32B4.v
+Line = 244
+[imp.design1]
+dbEnum =  oh
+invokeDir = /home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_smicram
+design = DebussyLib
+hostCommand = hostCommand -L /home/cqiu/work/prj/simPrj/sim_smic40_ram/tb/btc/vcs_vrd_nuvm_nip_nhls_smicram -f /home/cqiu/work/prj/simPrj/sim_smic40_ram/runsim/run_vcs_vrd_nuvm_nip_nhls_smicram/flist.f
+[nMemoryManager]
+FsdbFile = /home/cqiu/work/prj/simPrj/sim_smic40_ram/runsim/run_vcs_vrd_nuvm_nip_nhls_smicram/tb_dut_top.fsdb
+UserActionNum = 0
+nMemWindowNum = 0
+[wave.0]
+viewPort = 0 28 1025 375 222 126
+SessionFile = /home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_smicram/verdiLog/novas_autosave.ses.wave.0
+displayGrid = FALSE
+hierarchicalName = FALSE
+snap = TRUE
+displayLeadingZeros = FALSE
+fixDelta = FALSE
+displayCursorMarker = FALSE
+autoUpdate = FALSE
+highlightGlitchs = FALSE
+waveformSync = FALSE
+displayErrors = TRUE
+displayMsgSymbols = TRUE
+showMsgDescriptions = TRUE
+autoFit = FALSE
+displayDeltaY = FALSE
+centerCursor = FALSE

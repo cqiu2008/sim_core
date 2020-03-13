@@ -1,0 +1,69 @@
+@verdi rc file Version 1.0
+[General]
+VerdiVersion = Verdi3_L-2016.06-1
+[KeyNote]
+Line1 = Automatic Backup 0
+[TestBench]
+ConstrViewShow = 0
+InherViewShow = 0
+FSDBMsgShow = 0
+AnnotationShow = 0
+powerDumped = 0
+[hb]
+postSimFile = /home/cqiu/work/prj/simPrj/sim_sync_pulse/runsim/run_vcs_vrd_nuvm_nip_nhls_sync_pluse/tb_dut_top.fsdb
+syncTime = 42398100
+viewport = 1900 302 1276 700 202 310 202 1274
+activeNode = "tb_dut_top.U_sync_pulse"
+activeScope = "tb_dut_top.U_sync_pulse"
+activeFile = "/home/cqiu/work/prj/simPrj/sim_sync_pulse/rtl/sync_pulse.v"
+interactiveMode = False
+viewType = Source
+simulatorMode = False
+sourceBeginLine = 24
+baMode = False
+srcLineNum = True
+syncSignal = False
+traceMode = Hierarchical
+showTraceInSchema = True
+paMode = False
+funcMode = False
+traceCrossHier = True
+DnDtraceCrossHierOnly = True
+traceIncTopPort = False
+leadingZero = False
+signalPane = False
+Scope1 = "tb_dut_top.U_sync_pulse"
+multipleSelection = 1 24 2 0 0
+sdfCheckUndef = FALSE
+simFlow = FALSE
+[hb.sourceTab.1]
+scope = tb_dut_top.U_sync_pulse
+File = /home/cqiu/work/prj/simPrj/sim_sync_pulse/rtl/sync_pulse.v
+Line = 25
+[imp.design1]
+dbEnum =  oh
+invokeDir = /home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_sync_pluse
+design = DebussyLib
+hostCommand = hostCommand -L /home/cqiu/work/prj/simPrj/sim_sync_pulse/tb/btc/vcs_vrd_nuvm_nip_nhls_sync_pluse -f /home/cqiu/work/prj/simPrj/sim_sync_pulse/runsim/run_vcs_vrd_nuvm_nip_nhls_sync_pluse/flist.f
+[nMemoryManager]
+FsdbFile = /home/cqiu/work/prj/simPrj/sim_sync_pulse/runsim/run_vcs_vrd_nuvm_nip_nhls_sync_pluse/tb_dut_top.fsdb
+UserActionNum = 0
+nMemWindowNum = 0
+[wave.0]
+viewPort = 0 28 1068 310 295 71
+SessionFile = /home/cqiu/work/prj/simPrj/sim_core/tb/btc/vcs_vrd_nuvm_nip_nhls_sync_pluse/verdiLog/novas_autosave.ses.wave.0
+displayGrid = FALSE
+hierarchicalName = FALSE
+snap = TRUE
+displayLeadingZeros = FALSE
+fixDelta = FALSE
+displayCursorMarker = FALSE
+autoUpdate = FALSE
+highlightGlitchs = FALSE
+waveformSync = FALSE
+displayErrors = TRUE
+displayMsgSymbols = TRUE
+showMsgDescriptions = TRUE
+autoFit = FALSE
+displayDeltaY = FALSE
+centerCursor = FALSE

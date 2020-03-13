@@ -1,0 +1,61 @@
+*design* DebussyLib (btIdent Verdi3_L-2016.06-1)
+Command arguments:
+    +define+verilog
+    -L /home/cqiu/work/prj/simPrj/sim_smic40_ram/tb/btc/vcs_vrd_nuvm_nip_nhls_smicram
+    -f /home/cqiu/work/prj/simPrj/sim_smic40_ram/runsim/run_vcs_vrd_nuvm_nip_nhls_smicram/flist.f
+        /home/cqiu/work/prj/simPrj/sim_smic40_ram/rtl/smic40ram256x8.v
+        /home/cqiu/work/prj/simPrj/sim_smic40_ram/tb/btc/vcs_vrd_nuvm_nip_nhls_smicram/model/S40NLLVHSSPRLRK_DL_X128Y4D32B4.v
+        /home/cqiu/work/prj/simPrj/sim_smic40_ram/tb/btc/vcs_vrd_nuvm_nip_nhls_smicram/tb_dut_top.sv
+
+
+*Error* Syntax error at num
+"smicram/tsksmicram.vh", 8: 
+
+*Error* Syntax error at num
+"smicram/tsksmicram.vh", 31: 
+
+*Error* Syntax error at bwenIn
+"smicram/tsksmicram.vh", 32: 
+
+*Error* Syntax error at addrIn
+"smicram/tsksmicram.vh", 33: 
+
+*Error* Syntax error at wdataIn
+"smicram/tsksmicram.vh", 34: 
+
+*Error* Syntax error at )
+"smicram/tsksmicram.vh", 35: 
+
+*Error* Syntax error at num
+"smicram/tsksmicram.vh", 59: 
+
+*Error* Syntax error at addrIn
+"smicram/tsksmicram.vh", 60: 
+
+*Error* Syntax error at )
+"smicram/tsksmicram.vh", 61: 
+Highest level modules:
+tb_dut_top
+
+
+*Error* failed to find identifier logic[31:0]
+"smicram/tsksmicram.vh", 33: 
+
+*Error* failed to find identifier logic[31:0]
+"smicram/tsksmicram.vh", 34: 
+
+*Error* failed to find identifier addrIn[8:0]
+"smicram/tsksmicram.vh", 37: 
+
+*Error* failed to find identifier wdataIn
+"smicram/tsksmicram.vh", 38: 
+
+*Error* failed to find identifier bwenIn
+"smicram/tsksmicram.vh", 39: 
+
+*Error* failed to find identifier logic[31:0]
+"smicram/tsksmicram.vh", 60: 
+
+*Error* failed to find identifier addrIn[8:0]
+"smicram/tsksmicram.vh", 63: 
+Total	16 error(s),   0 warning(s)

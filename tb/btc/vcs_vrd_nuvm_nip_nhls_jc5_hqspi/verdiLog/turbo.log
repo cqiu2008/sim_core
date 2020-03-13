@@ -1,0 +1,3 @@
+Command Line: /opt/tool/synopsys/verdi_vL_2016_06_1/platform/LINUXAMD64/bin/Novas -L /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/tb/btc/vcs_vrd_nuvm_nip_nhls_jc5_hqspi -rcFile /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/vf/novas/novas.rc -f /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_jc5_hqspi/flist.f -ssf /home/cqiu/work/prj/simPrj/sim_hqspi_jc5/runsim/run_vcs_vrd_nuvm_nip_nhls_jc5_hqspi/tb_dut_top.fsdb
+uname(Linux cqiuLenovo 4.8.0-36-generic #36~16.04.1-Ubuntu SMP Sun Feb 5 09:39:57 UTC 2017 x86_64)
+au time 470.261338 26.540000 21.812000 delta 266584064 266584064 total 650334208 650334208
